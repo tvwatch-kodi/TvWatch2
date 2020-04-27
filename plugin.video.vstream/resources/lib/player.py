@@ -4,8 +4,8 @@
 from resources.lib.handler.inputParameterHandler import cInputParameterHandler
 from resources.lib.handler.pluginHandler import cPluginHandler
 from resources.lib.gui.gui import cGui
-from resources.lib.comaddon import addon, dialog, xbmc, isKrypton, VSlog
-import xbmcplugin
+from resources.lib.comaddon import addon, dialog, xbmc, isKrypton, VSlog, VShide_busy
+import xbmcplugin, xbmcgui
 
 #pour les sous titres
 #https://github.com/amet/service.subtitles.demo/blob/master/service.subtitles.demo/service.py
@@ -128,16 +128,32 @@ class cPlayer(xbmc.Player):
                 self.showSubtitles(False)
                 self.DIALOG.VSinfo('Sous-titres chargés, vous pouvez les activer', 'Sous-Titres', 15)
 
+        seek = True
+        next_episode = False
+        stop = False
         while self.isPlaying() and not self.forcestop:
         #while not xbmc.abortRequested:
             try:
                 self.currentTime = self.getTime()
                 self.totalTime = self.getTotalTime()
 
+                if seek:
+                    VShide_busy()
+                    self.seekTime(self.seek_Time)
+                    xbmc.sleep(2000)
+                    if self.getTime() >= self.seek_Time:
+                        seek = False
+
+                if (self.totalTime > 60) and (self.totalTime - self.currentTime < 30) and not stop:
+                    stop = True
+                    if xbmcgui.Window(10101).getProperty('item_type') == 'tvshow':
+                        self.DIALOG.VSinfo("Prochain épisode dans 30 secondes", sTitle, 10)
+                        next_episode = True
+
                 #xbmc.log(str(self.currentTime))
 
-            except:
-                pass
+            except Exception as err:
+                VSlog("Exception run: {0}".format(err))
                 #break
             xbmc.sleep(1000)
 
@@ -145,12 +161,14 @@ class cPlayer(xbmc.Player):
             self.onPlayBackStopped()
 
         #Uniquement avec la lecture avec play()
-        if (player_conf == '0'):
-            r = xbmcplugin.addDirectoryItem(handle=sPluginHandle, url=sUrl, listitem=item, isFolder=False)
-            #xbmcplugin.endOfDirectory(sPluginHandle, True, False, False)
-            return r
+        # if (player_conf == '0'):
+        #     r = xbmcplugin.addDirectoryItem(handle=sPluginHandle, url=sUrl, listitem=item, isFolder=False)
+        #     #xbmcplugin.endOfDirectory(sPluginHandle, True, False, False)
+        #     return r
 
         VSlog('Closing player')
+
+        return next_episode
 
     #fonction light servant par exmple pour visualiser les DL ou les chaines de TV
     def startPlayer(self):
@@ -170,7 +188,7 @@ class cPlayer(xbmc.Player):
         if self.totalTime > 0:
             pourcent = float('%.2f' % (self.currentTime / self.totalTime))
         if (pourcent > 0.90):
-
+            self.currentTime = 0.0
             # Marqué VU dans la BDD Vstream
             cGui().setWatched()
 

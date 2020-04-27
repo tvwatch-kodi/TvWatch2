@@ -10,7 +10,7 @@ import xbmc,xbmcgui
 import xbmc
 
 import xbmcaddon,os
-PathCache = xbmc.translatePath(xbmcaddon.Addon('plugin.video.vstream').getAddonInfo("profile"))
+PathCache = xbmc.translatePath(xbmcaddon.Addon('plugin.video.tvwatch2').getAddonInfo("profile"))
 
 #-----------------------------------------------------------
 #Partie veant de PYLOAD https://github.com/pyload
@@ -68,10 +68,10 @@ def conf():
     return conf
 
 
- #-----------------------------------------------------------------   
-    
-def get_response(img,cookie):    
-    
+ #-----------------------------------------------------------------
+
+def get_response(img,cookie):
+
     #on telecharge l'image
     filename  = os.path.join(PathCache,'Captcha.png')
 
@@ -85,7 +85,7 @@ def get_response(img,cookie):
         'Content-Type' : 'application/x-www-form-urlencoded',
         'Cookie' : cookie
         }
-        
+
     try:
         req = urllib2.Request(img,None,headers2)
         image_on_web = urllib2.urlopen(req)
@@ -119,7 +119,7 @@ def get_response(img,cookie):
     finally:
         wdlg.removeControl(img)
         wdlg.close()
-        
+
     return solution
 
 def DecryptDlProtect(url):
@@ -136,9 +136,9 @@ def DecryptDlProtect(url):
     #'Accept-Charset' : '',
     'Content-Type' : 'application/x-www-form-urlencoded',
     }
-    
+
     request = urllib2.Request(url,None,headers)
-    try: 
+    try:
         reponse = urllib2.urlopen(request,timeout = 5)
     except urllib2.URLError, e:
         cGui().showInfo("Erreur", 'Site Dl-Protect HS' , 5)
@@ -154,31 +154,31 @@ def DecryptDlProtect(url):
         print 'timeout'
         cGui().showInfo("Erreur", 'Site Dl-Protect HS' , 5)
         return ''
-    
+
     #Si redirection
     UrlRedirect = reponse.geturl()
     if not(UrlRedirect == url):
         reponse.close()
         return UrlRedirect
-        
+
     sHtmlContent = reponse.read()
-    
+
     #fh = open('c:\\test.txt', "w")
     #fh.write(sHtmlContent)
     #fh.close()
-        
+
     #site out ?
     if 'A technical problem occurred' in sHtmlContent:
         print 'Dl-protect HS'
         cGui().showInfo("Erreur", 'Site Dl-Protect HS' , 5)
         return ''
-        
+
     #lien HS ?
     if 'the link you are looking for is not found' in sHtmlContent:
         print 'lien Dl-protect HS'
         cGui().showInfo("Erreur", 'Lien non disponible' , 5)
         return ''
-    
+
     #Recuperatioen et traitement cookies ???
     cookies=reponse.info()['Set-Cookie']
     #print cookies
@@ -190,11 +190,11 @@ def DecryptDlProtect(url):
     cookies = ''
     for cook in c2:
         cookies = cookies + cook[0] + '=' + cook[1]+ ';'
-        
+
     #print cookies
 
     reponse.close()
-    
+
     #Quel captcha est utilise ?
     #Google re captcha ?
     r = re.search('data-sitekey="([^"]+)', sHtmlContent)
@@ -207,86 +207,84 @@ def DecryptDlProtect(url):
     #captcha classique
     elif '<td align=center> Please enter the characters from the picture to see the links </td>' in sHtmlContent:
         return ClassicCaptcha(sHtmlContent,cookies,url,headers)
-    
+
     #Pas de cpatcha, juste le boutton.
     if 'Please click on continue to see' in sHtmlContent:
-        
+
         key = re.findall('input name="key" value="(.+?)"',sHtmlContent)
-    
+
         #Ce parametre ne sert pas encore pour le moment
         mstime = int(round(time() * 1000))
         b64time = "_" + base64.urlsafe_b64encode(str(mstime)).replace("=", "%3D")
-              
+
         #tempo necessaire
         cGui().showInfo("Patientez", 'Decodage en cours' , 2)
         xbmc.sleep(1000)
-        
+
         query_args = ( ('submitform' , '' ) , ( 'key' , key[0] ) , ('i' , b64time ), ( 'submitform' , 'Continue')  )
         data = urllib.urlencode(query_args)
-        
+
         #rajout des cookies
         headers.update({'Cookie': cookies})
 
         request = urllib2.Request(url,data,headers)
 
-        try: 
+        try:
             reponse = urllib2.urlopen(request)
         except urllib2.URLError, e:
             print e.read()
             print e.reason
-            
+
         sHtmlContent = reponse.read()
-        
+
         reponse.close()
-    
+
         return sHtmlContent
-        
+
     return ''
- 
+
 def ClassicCaptcha(sHtmlContent,cookies,url,headers):
 
         s = re.findall('<img id="captcha" alt="Security code" src="([^<>"]+?)"',sHtmlContent)
-        
+
         if 'http://www.dl-protect.com' in s[0]:
             image = s[0]
         else:
             image = 'http://www.dl-protect.com' + s[0]
-        
+
         #print image
-        
+
         captcha = get_response(image,cookies)
-        
+
         key = re.findall('name="key" value="(.+?)"',sHtmlContent)
-        
+
         #Ce parametre ne sert pas encore
         mstime = int(round(time() * 1000))
         b64time = "_" + base64.urlsafe_b64encode(str(mstime)).replace("=", "%3D")
-        
+
         #test = info_encode(conf())
         #b64time = test.replace("%3D","=")
-        
+
         query_args = ( ('key' , key[0] ) , ( 'i' , b64time) , ('secure' , captcha ), ('submitform','') , ( 'submitform' , 'Decrypt link')  )
-        
+
         data = urllib.urlencode(query_args)
-    
+
         #rajout des cookies
         headers.update({'Cookie': cookies})
 
         request = urllib2.Request(url,data,headers)
 
-        try: 
+        try:
             reponse = urllib2.urlopen(request)
         except urllib2.URLError, e:
             print e.read()
             print e.reason
-            
+
         sHtmlContent = reponse.read()
         reponse.close()
-        
+
         if '<td align=center> Please enter the characters from the picture to see the links </td>' in sHtmlContent:
             cGui().showInfo("Erreur", 'Mauvais Captcha' , 5)
             return 'rate'
-        
-        return sHtmlContent
 
-        
+        return sHtmlContent
