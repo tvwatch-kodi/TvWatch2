@@ -2,7 +2,7 @@
 # https://github.com/Kodi-vStream/venom-xbmc-addons
 # Venom.
 
-# sLibrary = xbmc.translatePath('special://home/addons/plugin.video.vstream').decode('utf-8')
+# sLibrary = xbmc.translatePath('special://home/addons/plugin.video.tvwatch2').decode('utf-8')
 # sys.path.append (sLibrary)
 
 from resources.lib.comaddon import addon, progress, dialog, window, VSlog, xbmc, xbmcgui
@@ -175,7 +175,7 @@ class cAbout:
                 total = len(result['files'])
                 for i in result['files']:
 
-                    if 'plugin.video.vstream' in i['filename']:
+                    if 'plugin.video.tvwatch2' in i['filename']:
                         progress_.VSupdate(progress_, total)
 
                         rootpath = self.getRootPath(i['filename'])
@@ -197,7 +197,7 @@ class cAbout:
                 # données fichiers
                 sContent = 'Ajouter (%s) | Supprimer (%s) | Changement (%s) [CR]Fichiers mise à jour %s / %s' % (add, dell, schange, sdown, total)
                 listitem = xbmcgui.ListItem(label = 'vStream', label2 = sContent)
-                icon = 'special://home/addons/plugin.video.vstream/resources/art/update.png'
+                icon = 'special://home/addons/plugin.video.tvwatch2/resources/art/update.png'
                 listitem.setArt({'icon': icon, 'thumb': icon})
                 listitems.append(listitem)
 
@@ -287,7 +287,7 @@ class cAbout:
             def _close_dialog(self):
                 self.close()
 
-        path = 'special://home/addons/plugin.video.vstream'
+        path = 'special://home/addons/plugin.video.tvwatch2'
         wd = XMLDialog('DialogSelect.xml', path, 'Default')
         wd.doModal()
         del wd

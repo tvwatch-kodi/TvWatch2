@@ -16,7 +16,6 @@ import xbmc
 from resources.lib.util import urlEncode
 from resources.lib.comaddon import addon, dialog, VSlog, VSPath
 
-
 class cRequestHandler:
     REQUEST_TYPE_GET = 0
     REQUEST_TYPE_POST = 1
@@ -56,7 +55,7 @@ class cRequestHandler:
                 code, msg, hdrs = response.code, response.msg, response.info()
 
                 return response
-            
+
             https_response = http_response
 
         opener = urllib2.build_opener(NoRedirection)
@@ -131,7 +130,7 @@ class cRequestHandler:
             if xbmc.getInfoLabel('system.buildversion')[0:2] >= '19':
                 sParameters = self.__aParamatersLine.encode("utf-8")
             else:
-                sParameters = self.__aParamatersLine                
+                sParameters = self.__aParamatersLine
         else:
             sParameters = urlEncode(self.__aParamaters)
             if xbmc.getInfoLabel('system.buildversion')[0:2] >= '19':
@@ -179,7 +178,7 @@ class cRequestHandler:
             if self.__sResponseHeader.get('Content-Encoding') == 'gzip':
                 import zlib
                 sContent = zlib.decompress(sContent, zlib.MAX_WBITS | 16)
-                
+
                 if xbmc.getInfoLabel('system.buildversion')[0:2] >= '19':
                     sContent = decodeHTML(sContent, self.__sResponseHeader, zlibMode = True)
 
@@ -216,24 +215,24 @@ class cRequestHandler:
                     sContent = ''
 
             if not sContent:
-                dialog().VSerror("%s (%d),%s" % (addon().VSlang(30205), e.code, self.__sUrl))
+                VSlog("%s 1: (%d),%s" % (addon().VSlang(30205), e.code , self.__sUrl))
+                if self.__enableDNS:
+                    socket.getaddrinfo = self.save_getaddrinfo
+                    self.__enableDNS = False
 
         except UrlError as e:
+            VSlog("%s 2: (%s),%s" % (addon().VSlang(30205), e.reason , self.__sUrl))
             if 'CERTIFICATE_VERIFY_FAILED' in str(e.reason) and self.BUG_SSL == False:
                 self.BUG_SSL = True
                 return self.__callRequest()
             elif 'getaddrinfo failed' in str(e.reason) and self.__enableDNS == False:
-                # Retry with DNS only if addon is present
-                import xbmcvfs
-                if xbmcvfs.exists('special://home/addons/script.module.dnspython/'):
-                    self.__enableDNS = True
-                    return self.__callRequest()
-                else:
-                    error_msg = addon().VSlang(30470)
+                VSlog("Retry with DNS resolver")
+                self.__enableDNS = True
+                return self.__callRequest()
             else:
                 error_msg = "%s (%s),%s" % (addon().VSlang(30205), e.reason, self.__sUrl)
 
-            dialog().VSerror(error_msg)
+            VSlog(error_msg)
             sContent = ''
 
         if sContent:
@@ -250,18 +249,14 @@ class cRequestHandler:
 
         return sContent
 
-    def getHeaderLocationUrl(self):        
+    def getHeaderLocationUrl(self):
         opened = urllib2.urlopen(self.__sUrl)
         return opened.geturl()
 
     def new_getaddrinfo(self, *args):
         try:
-            import sys
             import dns.resolver
 
-            path = VSPath('special://home/addons/script.module.dnspython/lib/').decode('utf-8')
-            if path not in sys.path:
-                sys.path.append(path)
             host = args[0]
             port = args[1]
             # Keep the domain only: http://example.com/foo/bar => example.com

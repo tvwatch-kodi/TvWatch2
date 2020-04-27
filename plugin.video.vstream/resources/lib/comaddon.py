@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# https://github.com/Kodi-vStream/venom-xbmc-addons
+# https://github.com/Kodi-TvWatch/venom-xbmc-addons
 
-import xbmcaddon, xbmcgui, xbmc, xbmcvfs 
+import xbmcaddon, xbmcgui, xbmc, xbmcvfs
 
 """System d'importation
 
@@ -39,27 +39,27 @@ the python script "\plugin.video.vstream\default.py" has left several classes in
 # https://stackoverflow.com/questions/26588266/xbmc-addon-memory-leak
 
 """
-ADDONVS = xbmcaddon.Addon('plugin.video.vstream')    # singleton
+ADDONVS = xbmcaddon.Addon('plugin.video.tvwatch2')    # singleton
 
 # class addon(xbmcaddon.Addon):
 class addon():
 
-     
+
     def __init__(self, addonId = None):
         self.addonId = addonId
 
     def openSettings(self):
         return xbmcaddon.Addon(self.addonId).openSettings() if self.addonId else ADDONVS.openSettings()
-        
+
     def getSetting(self, key):
         return xbmcaddon.Addon(self.addonId).getSetting(key) if self.addonId else ADDONVS.getSetting(key)
-     
+
     def setSetting(self, key, value):
         return xbmcaddon.Addon(self.addonId).setSetting(key, value) if self.addonId else ADDONVS.setSetting(key, value)
-     
+
     def getAddonInfo(self, info):
         return xbmcaddon.Addon(self.addonId).getAddonInfo(info) if self.addonId else ADDONVS.getAddonInfo(info)
-     
+
     def VSlang(self, lang):
         return VSPath(xbmcaddon.Addon(self.addonId).getLocalizedString(lang)) if self.addonId else VSPath(ADDONVS.getLocalizedString(lang))
         #Bug avec accent xbmc.translatePath(xbmcaddon.Addon('plugin.video.vstream').getLocalizedString(lang)).decode('utf-8')
@@ -78,13 +78,13 @@ DIALOG = xbmcgui.Dialog() # Singleton
 class dialog():
 # class dialog(xbmcgui.Dialog):
 
-    def VSok(self, desc, title = 'vStream'):
+    def VSok(self, desc, title = 'TvWatch'):
         return DIALOG.ok(title, desc)
 
-    def VSyesno(self, desc, title = 'vStream'):
+    def VSyesno(self, desc, title = 'TvWatch'):
         return DIALOG.yesno(title, desc)
 
-    def VSselect(self, desc, title = 'vStream'):
+    def VSselect(self, desc, title = 'TvWatch'):
         return DIALOG.select(title, desc)
 
     def numeric(self, dialogType, heading, defaultt):
@@ -102,7 +102,7 @@ class dialog():
             return list_url[ret]
         return ''
 
-    def VSinfo(self, desc, title = 'vStream', iseconds = 0, sound = False):
+    def VSinfo(self, desc, title = 'TvWatch', iseconds = 0, sound = False):
         if (iseconds == 0):
             iseconds = 1000
         else:
@@ -114,15 +114,15 @@ class dialog():
         return DIALOG.notification(str(title), str(desc), xbmcgui.NOTIFICATION_INFO, iseconds, sound)
 
     def VSerror(self, e):
-        return DIALOG.notification('vStream', 'Erreur: ' + str(e), xbmcgui.NOTIFICATION_ERROR, 2000), VSlog('Erreur: ' + str(e))
+        return DIALOG.notification('TvWatch', 'Erreur: ' + str(e), xbmcgui.NOTIFICATION_ERROR, 2000), VSlog('Erreur: ' + str(e))
 
     def VStextView(self, desc, title = "vStream"):
         return DIALOG.textviewer(title, desc)
-    
+
 """
 from resources.lib.comaddon import progress
 
-Utilisation : 
+Utilisation :
 progress_ = progress()
 progress_.VScreate(SITE_NAME)
 progress_.VSupdate(progress_, total)
@@ -151,7 +151,7 @@ class empty():
 
 class progress(xbmcgui.DialogProgress):
 
-    def VScreate(self, title = 'vStream', desc = ''):
+    def VScreate(self, title = 'TvWatch', desc = ''):
 
         currentWindow = xbmcgui.getCurrentWindowId()
 #         if currentWindow == 10000 or currentWindow == 10103: # home, keyboard
@@ -170,10 +170,10 @@ class progress(xbmcgui.DialogProgress):
         global PROGRESS
         if not PROGRESS:    # Déjà refermé
             return
-        
+
         if not search and window(10101).getProperty('search') == 'true':
             return
-        
+
         global COUNT
         COUNT += 1
         iPercent = int(float(COUNT * 100) / total)
@@ -188,11 +188,11 @@ class progress(xbmcgui.DialogProgress):
 
         if window(10101).getProperty('search') == 'true':
             return
-        
+
         PROGRESS = None
         dialog.close()
 
-    
+
 """
 from resources.lib.comaddon import window
 
@@ -233,8 +233,8 @@ def VSlog(e, level = xbmc.LOGDEBUG):
                 level = xbmc.LOGINFO
             else:
                 level = xbmc.LOGNOTICE
-        xbmc.log('\t[PLUGIN] vStream: ' + str(e), level)
-        
+        xbmc.log('\t[PLUGIN] TvWatch: ' + str(e), level)
+
     except:
         pass
 

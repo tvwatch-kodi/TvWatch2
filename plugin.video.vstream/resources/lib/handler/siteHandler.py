@@ -47,7 +47,7 @@ class cSiteHandler:
 
     def getAvailablePlugins(self, sLabel):
         addons = addon()
-        sFolder = "special://home/addons/plugin.video.vstream/resources/sites"
+        sFolder = "special://home/addons/plugin.video.tvwatch2/resources/sites"
         sFolder = sFolder.replace('\\', '/')
         VSlog("Sites Folder: " + sFolder)
 

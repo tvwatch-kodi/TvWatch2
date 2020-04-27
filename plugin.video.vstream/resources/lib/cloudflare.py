@@ -83,7 +83,7 @@ if (False):
 # -----------------------------------------------------------
 
 # Cookie path
-# C:\Users\BRIX\AppData\Roaming\Kodi\userdata\addon_data\plugin.video.vstream\
+#C:\Users\BRIX\AppData\Roaming\Kodi\userdata\addon_data\plugin.video.tvwatch2\
 
 # Light method
 # Ne marche que si meme user-agent
