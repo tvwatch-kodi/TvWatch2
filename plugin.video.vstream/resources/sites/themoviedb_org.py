@@ -520,7 +520,7 @@ def showMovies(sSearch = ''):
             progress_.VSupdate(progress_, total)
             if progress_.iscanceled():
                 break
-            
+
             # Mise en forme des infos (au format meta imdb)
             i = grab._format(i,'')
 
@@ -630,13 +630,13 @@ def showSeries(sSearch=''):
             oOutputParameterHandler.addParameter('sFanart', sFanart)
             oOutputParameterHandler.addParameter('sTmdbId', sId)
             oOutputParameterHandler.addParameter('searchtext', cUtil().CleanName(sTitle))
-
+            oOutputParameterHandler.addParameter('sCat', '2')
 
             cGui.CONTENT = "tvshows"
             oGuiElement = cGuiElement()
             oGuiElement.setTmdbId(sId)
-            oGuiElement.setSiteName(SITE_IDENTIFIER) # a activer pour  saisons
-            oGuiElement.setFunction('showSeriesSaison')
+            oGuiElement.setSiteName('globalSearch')
+            oGuiElement.setFunction('searchMovie')
             oGuiElement.setTitle(sTitle)
             oGuiElement.setFileName(sTitle)
             oGuiElement.setIcon('series.png')
@@ -851,7 +851,7 @@ def showSeriesEpisode():
             oGui.addFolder(oGuiElement, oOutputParameterHandler)
 
         progress_.VSclose(progress_)
-    
+
     # tchnagement mode
     view = addons.getSetting('visuel-view')
     oGui.setEndOfDirectory(view)
@@ -875,7 +875,7 @@ def showActors(sSearch = ''):
     if sSearch:
         #format obligatoire evite de modif le format de l'url dans la lib >> _call
         #a cause d'un ? pas ou il faut pour ça >> invalid api key
-        result = grab.getUrl(sUrl,iPage,'query=' + sSearch) 
+        result = grab.getUrl(sUrl,iPage,'query=' + sSearch)
 
     else:
         result = grab.getUrl(sUrl, iPage)
@@ -885,7 +885,7 @@ def showActors(sSearch = ''):
     if (total > 0):
         total = len(result['results'])
         progress_ = progress().VScreate(SITE_NAME)
-        
+
         # récup le nombre de page pour NextPage
         nbrpage = result['total_pages']
 
@@ -967,7 +967,7 @@ def showFilmActor():
             progress_.VSupdate(progress_, total)
             if progress_.iscanceled():
                 break
-            
+
             # Mise en forme des infos (au format meta imdb)
             i = grab._format(i,'')
 
@@ -1034,7 +1034,7 @@ def showLists():
 
             # Mise en forme des infos (au format meta imdb)
             i = grab._format(i,'')
-            
+
             sId, sTitle, sType, sThumb, sFanart, sVote, sDesc, sYear = i['tmdb_id'], i['title'], i['media_type'], i['cover_url'], i['backdrop_url'], i['rating'], i['plot'], i['year']
 
             sTitle = sTitle.encode("utf-8")

@@ -1,8 +1,124 @@
-# Addon Name: vStream
-# Addon id: plugin.video.vStream
-# Addon Provider: vStream
+# Addon Name: TvWatch
+# Addon id: plugin.video.TvWatch
+# Addon Provider: TvWatch
 msgid ""
 msgstr ""
+
+msgctxt "#29968"
+msgid "Search on all servers"
+msgstr "Recherche dans tous les serveurs"
+
+msgctxt "#29969"
+msgid "Search on current server"
+msgstr "Recherche dans le serveur actuel"
+
+msgctxt "#29970"
+msgid "Autoplay next episode"
+msgstr "Lecture automatique du prochain épisode"
+
+msgctxt "#29971"
+msgid "Number of episodes before \"Still there?\" query"
+msgstr "Nombre d’épisodes avant la demande « Vous regardez toujours ? »"
+
+msgctxt "#29972"
+msgid "Customize autoplay duration by episode length"
+msgstr "Personnaliser la durée de la lecture automatique en fonction de la longueur de l’épisode"
+
+msgctxt "#29973"
+msgid "All episodes  [COLOR gray]any length[/COLOR]"
+msgstr "Tous les épisodes  [COLOR gray]quelque soit la durée[/COLOR]"
+
+msgctxt "#29974"
+msgid "Very short episodes  [COLOR gray]< 10 mins[/COLOR]"
+msgstr "Épdisodes très courts  [COLOR gray]< 10 min[/COLOR]"
+
+msgctxt "#29975"
+msgid "Short episodes  [COLOR gray]> 10 mins[/COLOR]"
+msgstr "Épisodes courts  [COLOR gray]> 10 min[/COLOR]"
+
+msgctxt "#29976"
+msgid "Medium episodes  [COLOR gray]> 20 mins[/COLOR]"
+msgstr "Épisodes moyens  [COLOR gray]> 20 min[/COLOR]"
+
+msgctxt "#29977"
+msgid "Long episodes  [COLOR gray]> 40 mins[/COLOR]"
+msgstr "Épisodes longs  [COLOR gray]> 40 min[/COLOR]"
+
+msgctxt "#29978"
+msgid "Very long episodes  [COLOR gray]> 60 mins[/COLOR]"
+msgstr "Épisodes très longs  [COLOR gray]> 60 min[/COLOR]"
+
+msgctxt "#29981"
+msgid "Watch Now"
+msgstr "Regarder maintenant"
+
+msgctxt "#29982"
+msgid "Up Next"
+msgstr "À suivre"
+
+msgctxt "#29983"
+msgid "Ends at: $INFO[Window.Property(endtime)]"
+msgstr "Fin à : $INFO[Window.Property(endtime)]"
+
+msgctxt "#29984"
+msgid "Continue watching"
+msgstr "Continuer à regarder"
+
+msgctxt "#29985"
+msgid "Still there?"
+msgstr "Toujours là ?"
+
+msgctxt "#29986"
+msgid "Stop"
+msgstr "Arrêter"
+
+msgctxt "#29988"
+msgid "Continue watching in [COLOR FFFF4081]$INFO[Window.Property(remaining)][/COLOR] seconds"
+msgstr "Continuer à regarder dans [COLOR FFFF4081]$INFO[Window.Property(remaining)][/COLOR] secondes"
+
+msgctxt "#29989"
+msgid "Up next in [COLOR FFFF4081]$INFO[Window.Property(remaining)][/COLOR] seconds"
+msgstr "À suivre dans [COLOR FFFF4081]$INFO[Window.Property(remaining)][/COLOR] secondes"
+
+msgctxt "#29990"
+msgid "Next episode in [COLOR FFFF4081]$INFO[Window.Property(remaining)][/COLOR] seconds"
+msgstr "Prochain épisode dans [COLOR FFFF4081]$INFO[Window.Property(remaining)][/COLOR] secondes"
+
+msgctxt "#29991"
+msgid "Next Episode"
+msgstr "Prochain épisode"
+
+msgctxt "#29992"
+msgid "DNS resolver"
+msgstr "Resolveur DNS"
+
+msgctxt "#29993"
+msgid "Activate DNS resolver"
+msgstr "Activer le resolveur DNS"
+
+msgctxt "#29994"
+msgid "Current server"
+msgstr "Serveur actuel"
+
+msgctxt "#29995"
+msgid "Choose server"
+msgstr "Choisir le serveur"
+
+msgctxt "#29996"
+msgid "My items"
+msgstr "Mes items"
+
+msgctxt "#29997"
+msgid "Continue Watching"
+msgstr "Continuer à regarder"
+
+msgctxt "#29998"
+msgid "Other items"
+msgstr "Autres items"
+
+msgctxt "#29999"
+msgid "You will find here the Movies and TVShows that you started watching !"
+msgstr "Vous trouverez ici les Films et Séries que vous avez commencés à regarder !"
 
 msgctxt "#30000"
 msgid "Logging"
@@ -25,12 +141,12 @@ msgid "Downloads Stopped"
 msgstr "Téléchargements Arrêté"
 
 msgctxt "#30005"
-msgid "vStream will be faster with your own API key."
-msgstr "vStream sera plus rapide avec votre propre clef API."
+msgid "TMDB settings"
+msgstr "Paramètres TMDB"
 
 msgctxt "#30006"
-msgid "Search Metadata (slowed vStream)"
-msgstr "Recherche les Métadonnées (ralenti vStream)"
+msgid "Search Metadata (May make the plugin slower)"
+msgstr "Recherche les Métadonnées (Peut ralentir le plugin)"
 
 msgctxt "#30007"
 msgid "Posters Size"
@@ -57,8 +173,8 @@ msgid "Downloads already started"
 msgstr "Téléchargements déjà démarrés"
 
 msgctxt "#30013"
-msgid "vStream update"
-msgstr "Mise à jour vStream"
+msgid "TvWatch update"
+msgstr "Mise à jour TvWatch"
 
 msgctxt "#30014"
 msgid "Update complete"
@@ -229,8 +345,8 @@ msgid "Import/Export the BDD (Bookmark, History, etc.)"
 msgstr "Importer/Exporter la BDD (Marque-Page, Historique, etc..)"
 
 msgctxt "#30056"
-msgid "Remove BDD from vStream"
-msgstr "Supprime les BDD de vStream"
+msgid "Remove BDD from TvWatch"
+msgstr "Supprime les BDD de TvWatch"
 
 msgctxt "#30057"
 msgid "Delete a database"
@@ -277,8 +393,8 @@ msgid "Configure UrlResolver"
 msgstr "Configurer UrlResolver"
 
 msgctxt "#30068"
-msgid "WARNING: vStream does not manage this part,[CR] remember to deactivate it if the videos no longer work."
-msgstr "ATTENTION: vStream ne gère pas cette partie,[CR] pensez à le désactiver si les vidéos ne marchent plus."
+msgid "WARNING: TvWatch does not manage this part,[CR] remember to deactivate it if the videos no longer work."
+msgstr "ATTENTION: TvWatch ne gère pas cette partie,[CR] pensez à le désactiver si les vidéos ne marchent plus."
 
 msgctxt "#30069"
 msgid "Unless you have a premium link generator,[CR] checking this box will bring you more problems than advantages."
@@ -353,20 +469,20 @@ msgid "Download Started"
 msgstr "Téléchargement Démarré"
 
 msgctxt "#30087"
-msgid "Clear Cache vStream, Error"
-msgstr "Nettoyage du cache vStream, Erreur"
+msgid "Clear Cache TvWatch, Error"
+msgstr "Nettoyage du cache TvWatch, Erreur"
 
 msgctxt "#30088"
 msgid "Visual search"
 msgstr "Recherche visuelle"
 
 msgctxt "#30089"
-msgid "Clear vStream Cache, Successful[CR](Important relaunch vStream)"
-msgstr "Nettoyage du cache vStream, Réussi[CR](Important relancer vStream)"
+msgid "Clear TvWatch Cache, Successful[CR](Important relaunch TvWatch)"
+msgstr "Nettoyage du cache TvWatch, Réussi[CR](Important relancer TvWatch)"
 
 msgctxt "#30090"
-msgid "Suppression Database, Successful[CR] (Important relaunch vStream)"
-msgstr "Suppression BDD, Réussi[CR] (Important relancer vStream)"
+msgid "Suppression Database, Successful[CR] (Important relaunch TvWatch)"
+msgstr "Suppression BDD, Réussi[CR] (Important relancer TvWatch)"
 
 msgctxt "#30091"
 msgid "Suppression Database, Error"
@@ -465,8 +581,8 @@ msgid "Web video"
 msgstr "Vidéos du net"
 
 msgctxt "#30115"
-msgid "Television/Music"
-msgstr "Télévision/Musique"
+msgid "Television / Radio (Live)"
+msgstr "Télévision / Radio (En direct)"
 
 msgctxt "#30116"
 msgid "All the sources"
@@ -493,8 +609,8 @@ msgid "Tools"
 msgstr "Outils"
 
 msgctxt "#30128"
-msgid "Clear Cache vStream"
-msgstr "Vider le Cache de vStream"
+msgid "Clear Cache TvWatch"
+msgstr "Vider le Cache de TvWatch"
 
 msgctxt "#30129"
 msgid "Clear Cache Kodi"
@@ -701,8 +817,8 @@ msgid "Calendar"
 msgstr "Calendrier des sorties VO"
 
 msgctxt "#30332"
-msgid "Iptv (official)"
-msgstr "Iptv (officiel)"
+msgid "Television"
+msgstr "Télévision"
 
 msgctxt "#30340"
 msgid "Trakt integration"
@@ -869,8 +985,8 @@ msgid "Enable/Disable sources"
 msgstr "Activer/Désactiver les sources"
 
 msgctxt "#30421"
-msgid "Go to [COLOR teal]%s[CR]%s[/COLOR][CR],Valid vStream, only then click YES"
-msgstr "Rendez vous sur [COLOR teal]%s[CR]%s[/COLOR][CR], Valider vStream, seulement ensuite cliquer OUI"
+msgid "Go to [COLOR teal]%s[CR]%s[/COLOR][CR],Valid TvWatch, only then click YES"
+msgstr "Rendez vous sur [COLOR teal]%s[CR]%s[/COLOR][CR], Valider TvWatch, seulement ensuite cliquer OUI"
 
 msgctxt "#30422"
 msgid "Enable log records"
@@ -1050,4 +1166,4 @@ msgstr "Minute"
 
 msgctxt "#30469"
 msgid "Hoster Direct"
-msgstr ""
+msgstr "Hoster Direct"

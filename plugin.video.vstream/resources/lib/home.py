@@ -138,7 +138,7 @@ class cHome:
 
         #print xbmc.getInfoLabel('ListItem.Property(Category)')
 
-        oGui.addText('globalSearch', addons.VSlang(30077) % (searchtext), 'none.png')
+        oGui.addText('searchGlobal', addons.VSlang(30077) % (searchtext), 'none.png')
 
         #utilisation de guielement pour ajouter la bonne catégorie
 
@@ -147,7 +147,7 @@ class cHome:
         oOutputParameterHandler.addParameter('searchtext', searchtext)
 
         oGuiElement = cGuiElement()
-        oGuiElement.setSiteName('globalSearch')
+        oGuiElement.setSiteName('searchGlobal')
         oGuiElement.setFunction('showSearch')
         oGuiElement.setTitle(addons.VSlang(30078))
         oGuiElement.setFileName(addons.VSlang(30078))
@@ -164,7 +164,7 @@ class cHome:
         oOutputParameterHandler.addParameter('searchtext', searchtext)
 
         oGuiElement = cGuiElement()
-        oGuiElement.setSiteName('globalSearch')
+        oGuiElement.setSiteName('searchGlobal')
         oGuiElement.setFunction('showSearch')
         oGuiElement.setTitle(addons.VSlang(30079))
         oGuiElement.setFileName(addons.VSlang(30079))
@@ -181,7 +181,7 @@ class cHome:
         oOutputParameterHandler.addParameter('searchtext', searchtext)
 
         oGuiElement = cGuiElement()
-        oGuiElement.setSiteName('globalSearch')
+        oGuiElement.setSiteName('searchGlobal')
         oGuiElement.setFunction('showSearch')
         oGuiElement.setTitle(addons.VSlang(30080))
         oGuiElement.setFileName(addons.VSlang(30080))
@@ -198,7 +198,7 @@ class cHome:
         # oOutputParameterHandler.addParameter('searchtext', searchtext)
         # oOutputParameterHandler.addParameter('disp', 'search10')
         # oOutputParameterHandler.addParameter('readdb', 'True')
-        # oGui.addDir('globalSearch', 'showSearchText', 'addons.VSlang(30417), 'search.png', oOutputParameterHandler)
+        # oGui.addDir('searchGlobal', 'showSearchText', 'addons.VSlang(30417), 'search.png', oOutputParameterHandler)
 
         oGui.setEndOfDirectory()
 
@@ -432,8 +432,8 @@ class cHome:
             #oOutputParameterHandler.addParameter('readdb', 'False')
 
             oGuiElement = cGuiElement()
-            oGuiElement.setSiteName('globalSearch')
-            oGuiElement.setFunction('globalSearch')
+            oGuiElement.setSiteName('searchGlobal')
+            oGuiElement.setFunction('searchGlobal')
             oGuiElement.setTitle('- ' + match[1])
             oGuiElement.setFileName(match[1])
             oGuiElement.setCat(match[2])
@@ -514,4 +514,3 @@ class cHome:
     #         oGui.addDir(aPlugin[1], 'load', aPlugin[0], icon, oOutputParameterHandler)
 
     #     oGui.setEndOfDirectory()
-

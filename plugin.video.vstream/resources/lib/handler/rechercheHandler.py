@@ -142,8 +142,8 @@ class cRechercheHandler:
 
         #sFolder =  self.getRootFolder()
         #sFolder = os.path.join(sFolder, 'resources/sites')
-        
-        sFolder = "special://home/addons/plugin.video.vstream/resources/sites"
+
+        sFolder = "special://home/addons/plugin.video.tvwatch2/resources/sites"
 
         # xbox hack
         sFolder = sFolder.replace('\\', '/')
@@ -155,7 +155,7 @@ class cRechercheHandler:
         for sFileName in aFileNames:
             sPluginSettingsName = 'plugin_' + sFileName
             bPlugin = addons.getSetting(sPluginSettingsName)
-            if (bPlugin == 'true'):
+            if (bPlugin == 'true') or True:
                 aPlugin = self.importPlugin(sFileName, sCat)
                 if aPlugin:
                     aPlugins.append(aPlugin)
