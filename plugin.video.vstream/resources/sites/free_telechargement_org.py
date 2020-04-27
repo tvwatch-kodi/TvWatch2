@@ -24,7 +24,7 @@ URL_MAIN = 'http://www.free-telecharger.org/'
 URL_PROTECT = 'liens.free-telecharg'  # ne pas mettre 'er' ou 'ement' à la fin, perte de hosters
 
 FUNCTION_SEARCH = 'showSearchResult'
-URL_SEARCH = (URL_MAIN + '1/recherche/1.html?rech_fiche=', FUNCTION_SEARCH)
+URL_SEARCH = (URL_MAIN + '1/recherche1/1.html?rech_fiche=', FUNCTION_SEARCH)
 URL_SEARCH_MOVIES = (URL_MAIN + '1/recherche/1.html?rech_cat=video&rech_fiche=', FUNCTION_SEARCH)
 URL_SEARCH_SERIES = (URL_MAIN + '1/recherche/1.html?rech_cat=serie&rech_fiche=', FUNCTION_SEARCH)
 URL_SEARCH_ANIMES = (URL_MAIN + '1/recherche/1.html?rech_cat=Animations&rech_fiche=', FUNCTION_SEARCH)
@@ -764,8 +764,8 @@ def get_response(img, cookie):
 
     dialogs = dialog()
 
-    filename = "special://home/userdata/addon_data/plugin.video.vstream/Captcha.raw"
-    # PathCache = xbmc.translatePath(xbmcaddon.Addon('plugin.video.vstream').getAddonInfo("profile"))
+    filename = "special://home/userdata/addon_data/plugin.video.tvwatch2/Captcha.raw"
+    # PathCache = xbmc.translatePath(xbmcaddon.Addon('plugin.video.tvwatch2').getAddonInfo("profile"))
     # filename  = os.path.join(PathCache, 'Captcha.raw')
 
     # hostComplet = re.sub(r'(https*:\/\/[^/]+)(\/*.*)', '\\1', img)
@@ -846,7 +846,7 @@ def get_response(img, cookie):
                     if action.getId() in (9, 10, 11, 30, 92, 216, 247, 257, 275, 61467, 61448):
                         self.close()
 
-            path = "special://home/addons/plugin.video.vstream"
+            path = "special://home/addons/plugin.video.tvwatch2"
             wd = XMLDialog('DialogCaptcha.xml', path, 'default', '720p')
             wd.doModal()
             del wd

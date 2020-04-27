@@ -11,7 +11,7 @@ import xbmc
 import xbmcplugin
 import xbmcvfs
 
-from resources.lib.comaddon import progress, addon, dialog
+from resources.lib.comaddon import progress, addon, dialog, VSlog
 from resources.lib.enregistrement import cEnregistremement
 from resources.lib.epg import cePg
 from resources.lib.gui.gui import cGui
@@ -41,7 +41,7 @@ headers = {'User-Agent': UA, 'Accept': '*/*', 'Connection': 'keep-alive'}
 icon = 'tv.png'
 # /home/lordvenom/.kodi/
 # sRootArt = cConfig().getRootArt()
-sRootArt = 'special://home/addons/plugin.video.vstream/resources/art/tv'
+sRootArt = 'special://home/addons/plugin.video.tvwatch2/resources/art/tv'
 ADDON = addon()
 
 
@@ -52,7 +52,6 @@ class track():
         self.path = path
         self.icon = icon
         self.data = data
-
 
 def load():
     oGui = cGui()
@@ -162,7 +161,7 @@ def parseM3U(sUrl=None, infile=None):  # Traite les m3u local
 
     try:
         line = inf.readline()
-    finally:
+    except:
         pass
 
     playlist = []
@@ -196,7 +195,7 @@ def parseM3U(sUrl=None, infile=None):  # Traite les m3u local
 
     try:
         inf.close()
-    finally:
+    except:
         pass
 
     return playlist

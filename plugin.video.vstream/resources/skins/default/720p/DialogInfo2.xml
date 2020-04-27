@@ -30,7 +30,7 @@
 			</control>
 
 			<control type="image">
-				<texture>special://home/addons/plugin.video.vstream/resources/extra/debuggrid1080.png</texture>
+				<texture>special://home/addons/plugin.video.tvwatch2/resources/extra/debuggrid1080.png</texture>
 				<visible>Skin.HasSetting(DebugGrid)</visible>
 			</control>
 
@@ -111,17 +111,17 @@
 							<onclick>noop</onclick>
 						</item>
 						<item>
-							<label>[UPPERCASE]$ADDON[plugin.video.vstream 30105][/UPPERCASE]</label>
+							<label>[UPPERCASE]$ADDON[plugin.video.tvwatch2 30105][/UPPERCASE]</label>
 							<onclick>noop</onclick>
 							<visible>!Control.HasFocus(50) + !Control.HasFocus(36) + !Control.HasFocus(5200)</visible>
 						</item>
 						<item>
-							<label>[UPPERCASE]$ADDON[plugin.video.vstream 30462][/UPPERCASE]</label>
+							<label>[UPPERCASE]$ADDON[plugin.video.tvwatch2 30462][/UPPERCASE]</label>
 							<onclick>noop</onclick>
 							<visible>!Control.HasFocus(50) + !Control.HasFocus(36) + !Control.HasFocus(5200)</visible>
 						</item>
 						<item>
-							<label>[UPPERCASE]$ADDON[plugin.video.vstream 30461][/UPPERCASE]</label>
+							<label>[UPPERCASE]$ADDON[plugin.video.tvwatch2 30461][/UPPERCASE]</label>
 							<onclick>noop</onclick>
 							<visible>!Control.HasFocus(50) + !Control.HasFocus(36) + !Control.HasFocus(5200)</visible>
 						</item>
@@ -347,12 +347,12 @@
 							<visible>Control.HasFocus(5200)</visible>
 						</item>
 						<item>
-							<label>[UPPERCASE]$ADDON[plugin.video.vstream 30463][/UPPERCASE] [COLOR=white]$INFO[Window(Home).Property(ListItem.premiered)][/COLOR]</label>
+							<label>[UPPERCASE]$ADDON[plugin.video.tvwatch2 30463][/UPPERCASE] [COLOR=white]$INFO[Window(Home).Property(ListItem.premiered)][/COLOR]</label>
 							<onclick>noop</onclick>
 							<visible>!Control.HasFocus(50) + !Control.HasFocus(36) + !Control.HasFocus(5200)</visible>
 						</item>
 						<item>
-							<label>[UPPERCASE]$ADDON[plugin.video.vstream 30460][/UPPERCASE]</label>
+							<label>[UPPERCASE]$ADDON[plugin.video.tvwatch2 30460][/UPPERCASE]</label>
 							<onclick>noop</onclick>
 							<visible>!Control.HasFocus(50) + !Control.HasFocus(36) + !Control.HasFocus(5200)</visible>
 						</item>
@@ -467,7 +467,7 @@
 					</focusedlayout>
 					<content>
 						<item>
- 							<label>[UPPERCASE]$ADDON[plugin.video.vstream 30464][/UPPERCASE] [COLOR=white]$INFO[Window(Home).Property(ListItem.durationH)]h$INFO[Window(Home).Property(ListItem.durationM)]m[/COLOR]</label>
+ 							<label>[UPPERCASE]$ADDON[plugin.video.tvwatch2 30464][/UPPERCASE] [COLOR=white]$INFO[Window(Home).Property(ListItem.durationH)]h$INFO[Window(Home).Property(ListItem.durationM)]m[/COLOR]</label>
 							<onclick>noop</onclick>
 						</item>
 					</content>
@@ -812,32 +812,32 @@
 					</focusedlayout>
 					<content>
 						<item>
-							<label>[UPPERCASE]$ADDON[plugin.video.vstream 30461][/UPPERCASE]</label>
+							<label>[UPPERCASE]$ADDON[plugin.video.tvwatch2 30461][/UPPERCASE]</label>
 							<icon>resume.png</icon>
 							<onclick>SetFocus(36)</onclick>
 						</item>
 						<item>
-							<label>[UPPERCASE]$ADDON[plugin.video.vstream 30460][/UPPERCASE]</label>
+							<label>[UPPERCASE]$ADDON[plugin.video.tvwatch2 30460][/UPPERCASE]</label>
 							<icon>cast.png</icon>
 							<onclick>SendClick(10000,7)</onclick>
 						</item>
 						<item>
-							<label>[UPPERCASE]$ADDON[plugin.video.vstream 30459][/UPPERCASE]</label>
+							<label>[UPPERCASE]$ADDON[plugin.video.tvwatch2 30459][/UPPERCASE]</label>
 							<icon>similar.png</icon>
 							<onclick>SendClick(10000,9)</onclick>
 						</item>
 						<item>
-							<label>[UPPERCASE]$ADDON[plugin.video.vstream 30458][/UPPERCASE]</label>
+							<label>[UPPERCASE]$ADDON[plugin.video.tvwatch2 30458][/UPPERCASE]</label>
 							<icon>recomanded.png</icon>
 							<onclick>SendClick(10000,13)</onclick>
 						</item>
 						<item>
-							<label>[UPPERCASE]$ADDON[plugin.video.vstream 30457][/UPPERCASE]</label>
+							<label>[UPPERCASE]$ADDON[plugin.video.tvwatch2 30457][/UPPERCASE]</label>
 							<icon>ba.png</icon>
 							<onclick>SendClick(10000,11)</onclick>
 						</item>
 						<item>
-							<label>[UPPERCASE]$ADDON[plugin.video.vstream 30409][/UPPERCASE]</label>
+							<label>[UPPERCASE]$ADDON[plugin.video.tvwatch2 30409][/UPPERCASE]</label>
 							<icon>close.png</icon>
 							<onclick>SendClick(10000,30)</onclick>
 						</item>
@@ -869,7 +869,7 @@
 					<font>font12</font>
 					<height>40</height>
 					<width>187</width>
-					<label>[UPPERCASE]$ADDON[plugin.video.vstream 30461][/UPPERCASE]</label>
+					<label>[UPPERCASE]$ADDON[plugin.video.tvwatch2 30461][/UPPERCASE]</label>
 					<textcolor>white</textcolor>
 					<shadowcolor>black</shadowcolor>
 					<texturenofocus>nofocus.png</texturenofocus>
@@ -885,7 +885,7 @@
 					<font>font12</font>
 					<height>40</height>
 					<width>187</width>
-					<label>[UPPERCASE]$ADDON[plugin.video.vstream 30460][/UPPERCASE]</label>
+					<label>[UPPERCASE]$ADDON[plugin.video.tvwatch2 30460][/UPPERCASE]</label>
 					<textcolor>white</textcolor>
 					<shadowcolor>black</shadowcolor>
 					<texturenofocus>nofocus.png</texturenofocus>
@@ -901,7 +901,7 @@
 					<font>font12</font>
 					<height>40</height>
 					<width>187</width>
-					<label>[UPPERCASE]$ADDON[plugin.video.vstream 30459][/UPPERCASE]</label>
+					<label>[UPPERCASE]$ADDON[plugin.video.tvwatch2 30459][/UPPERCASE]</label>
 					<textcolor>white</textcolor>
 					<shadowcolor>black</shadowcolor>
 					<texturenofocus>nofocus.png</texturenofocus>
@@ -915,7 +915,7 @@
 					<font>font12</font>
 					<height>40</height>
 					<width>187</width>
-					<label>[UPPERCASE]$ADDON[plugin.video.vstream 30458][/UPPERCASE]</label>
+					<label>[UPPERCASE]$ADDON[plugin.video.tvwatch2 30458][/UPPERCASE]</label>
 					<textcolor>white</textcolor>
 					<shadowcolor>black</shadowcolor>
 					<texturenofocus>nofocus.png</texturenofocus>
@@ -945,7 +945,7 @@
 					<font>font12</font>
 					<height>40</height>
 					<width>187</width>
-					<label>$ADDON[plugin.video.vstream 30409]</label>
+					<label>$ADDON[plugin.video.tvwatch2 30409]</label>
 					<textcolor>white</textcolor>
 					<shadowcolor>black</shadowcolor>
 					<texturenofocus>nofocus.png</texturenofocus>

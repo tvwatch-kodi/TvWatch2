@@ -56,7 +56,7 @@ class cPluginHandler:
     def getAvailablePlugins(self, force=False):
         addons = addon()
 
-        sFolder = "special://home/addons/plugin.video.vstream/resources/sites"
+        sFolder = "special://home/addons/plugin.video.tvwatch2/resources/sites"
         sFolder = sFolder.replace('\\', '/')
         VSlog("Sites Folder " + sFolder)
 
@@ -84,7 +84,7 @@ class cPluginHandler:
         return aPlugins
 
     def getAllPlugins(self):
-        sFolder = "special://home/addons/plugin.video.vstream/resources/sites"
+        sFolder = "special://home/addons/plugin.video.tvwatch2/resources/sites"
         sFolder = sFolder.replace('\\', '/')
         VSlog("Sites Folder " + sFolder)
 
