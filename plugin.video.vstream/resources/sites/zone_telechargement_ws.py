@@ -37,6 +37,9 @@ def GetURL_MAIN():
     # z = oInputParameterHandler.getAllParameter()
     # VSlog(z)
 
+    if not Sources or not sUrl:
+        return URL_HOST
+
     # quand vstream load tous les sites on passe >> globalSources
     # quand vstream load a partir du menu home on passe >> callplugin
     # quand vstream fabrique une liste de plugin pour menu(load site globalRun and call function search) >> search
@@ -601,10 +604,10 @@ def showSeriesLinks():
     # on recherche d'abord la qualité courante
     sPattern = '<div style="[^"]+?">.+?Qualité (.+?) [|] (.+?)<.+?img src="(([^"]+))"'
     aResult = oParser.parse(sHtmlContent, sPattern)
- 
+
     sQual = ''
     sLang = ''
-    if (aResult[1]):    
+    if (aResult[1]):
         aEntry = aResult[1][0]
         sQual = aEntry[0]
         sLang = aEntry[1]
@@ -928,7 +931,7 @@ def DecryptDlProtecte(url):
         RestUrl = 'https://' + url.split('/')[2] +  RestUrl
 
     sHtmlContent = Stormwall().GetHtml(RestUrl + "?_token" + token)
-    
+
     return str(sHtmlContent)
 
 # ******************************************************************************

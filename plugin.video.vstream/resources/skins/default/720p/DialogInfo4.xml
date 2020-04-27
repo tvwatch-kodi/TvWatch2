@@ -50,14 +50,14 @@
 			</control>
 
 			<!--<control type="image">
-				<texture>special://home/addons/plugin.video.vstream/resources/extra/debuggrid1080.png</texture>		
+				<texture>special://home/addons/plugin.video.tvwatch2/resources/extra/debuggrid1080.png</texture>
 			</control>-->
 
 
 			<!-- left page -->
 			<control type="group" id="49">
 				<left>0</left>
-				<align>left</align>	
+				<align>left</align>
 
 
 				<control type="group">
@@ -132,7 +132,7 @@
 							<texturenofocus colordiffuse="D0FFFFFF">linefocus.png</texturenofocus>
 							<texturefocus colordiffuse=$INFO[Window.Property(color)]>linefocus.png</texturefocus>
 							<animation reversible="false" center="auto" easing="inout" effect="zoom" end="100" start="90" time="400" tween="back">Focus</animation>
-							<label>$ADDON[plugin.video.vstream 30409]</label>
+							<label>$ADDON[plugin.video.tvwatch2 30409]</label>
 							<onclick>Action(Close)</onclick>
 							<visible>!Player.HasMedia</visible>
 						</control>
@@ -236,7 +236,7 @@
 					<animation center="auto" easing="inout" effect="fade" end="0" start="100" time="1200">Focus</animation>
 					<onclick>SetFocus(9000)</onclick>
 				</control>
-				
+
 			</control>
 
 			<!--player-->
@@ -267,7 +267,7 @@
 					<aspectratio aligny="top" align="left">scale</aspectratio>
 				</control>
 			</control>
-		
+
 			<!--synopsis-->
 			<control type="group">
 				<animation center="auto" easing="inout" effect="fade" end="100" start="0" time="400" tween="sine">Visible</animation>
@@ -320,7 +320,7 @@
                 <top>133</top>
 				<left>522</left>
 				<visible>String.IsEqual(Window.Property(vstream_menu),Home) + !Player.HasMedia</visible>
-				
+
 				<control type="label" id="1">
 					<description>header label</description>
 					<height>20</height>
@@ -499,7 +499,7 @@
 					<shadowcolor>black</shadowcolor>
 					<textcolor>white</textcolor>
 				</control>
-				
+
 
 				<control type="textbox" id="400">
 					<description>Description Value for Movies</description>
@@ -539,7 +539,7 @@
 					<onup>50</onup>
 					<ondown>9000</ondown>
 					<align>left</align>
-					
+
 					<!-- <autoscroll time="4000" delay="4000" repeat="2000">!Control.HasFocus(50)</autoscroll> -->
 					<orientation>horizontal</orientation>
 
@@ -688,7 +688,7 @@
 					<width>820</width>
 					<height>20</height>
 					<font>font12</font>
-					<label>$ADDON[plugin.video.vstream 30460]: $INFO[Container(50).ListItem.Label] / $INFO[Container(50).ListItem.Label2]</label>
+					<label>$ADDON[plugin.video.tvwatch2 30460]: $INFO[Container(50).ListItem.Label] / $INFO[Container(50).ListItem.Label2]</label>
 					<align>left</align>
 					<aligny>center</aligny>
 					<textcolor>white</textcolor>
@@ -706,7 +706,7 @@
 					<aligny>center</aligny>
 					<textcolor>white</textcolor>
 				</control>
-				
+
 				<control type="Wraplist" id="50">
 					<left>465</left>
 					<top>145</top>
@@ -718,8 +718,8 @@
 					<ondown>5200</ondown>
 					<align>left</align>
 					<onclick>SetProperty(vstream_menu,Person)</onclick>
-					
-					
+
+
 					<!-- <autoscroll time="4000" delay="4000" repeat="2000">!Control.HasFocus(50)</autoscroll> -->
 					<orientation>horizontal</orientation>
 
@@ -797,7 +797,7 @@
 								<bordersize>20</bordersize>
 								<bordertexture border="30" colordiffuse="55ffffff">shadow-20.png</bordertexture>
 								<texture border="30" colordiffuse=$INFO[Window.Property(color)]>box.png</texture>
-		
+
 							</control>
 
 							<control type="image">
@@ -861,7 +861,7 @@
 					<onup>50</onup>
 					<ondown>9000</ondown>
 					<align>left</align>
-					
+
 					<!-- <autoscroll time="4000" delay="4000" repeat="2000">!Control.HasFocus(50)</autoscroll> -->
 					<orientation>horizontal</orientation>
 
@@ -993,7 +993,7 @@
 					</focusedlayout>
 				</control>
 
-				
+
 			</control>
 
 
@@ -1009,7 +1009,7 @@
 					<width>820</width>
 					<height>20</height>
 					<font>font12</font>
-					<label>$ADDON[plugin.video.vstream 30459]: $INFO[Container(5205).ListItem.Label]</label>
+					<label>$ADDON[plugin.video.tvwatch2 30459]: $INFO[Container(5205).ListItem.Label]</label>
 					<align>left</align>
 					<aligny>center</aligny>
 					<textcolor>white</textcolor>
@@ -1021,12 +1021,12 @@
 					<width>820</width>
 					<height>20</height>
 					<font>font12</font>
-					<label>$ADDON[plugin.video.vstream 30313]: $INFO[Container(5210).ListItem.Label]</label>
+					<label>$ADDON[plugin.video.tvwatch2 30313]: $INFO[Container(5210).ListItem.Label]</label>
 					<align>left</align>
 					<aligny>center</aligny>
 					<textcolor>white</textcolor>
 				</control>
-				
+
 				<control type="wraplist" id="5205">
 					<left>465</left>
 					<top>145</top>
@@ -1037,7 +1037,7 @@
 					<onup>9000</onup>
 					<ondown>5210</ondown>
 					<align>left</align>
-					
+
 					<!-- <autoscroll time="4000" delay="4000" repeat="2000">!Control.HasFocus(50)</autoscroll> -->
 					<orientation>horizontal</orientation>
 
@@ -1180,7 +1180,7 @@
 					<onup>5205</onup>
 					<ondown>9000</ondown>
 					<align>left</align>
-					
+
 					<!-- <autoscroll time="4000" delay="4000" repeat="2000">!Control.HasFocus(50)</autoscroll> -->
 					<orientation>horizontal</orientation>
 
@@ -1312,7 +1312,7 @@
 					</focusedlayout>
 				</control>
 
-				
+
 			</control>
 
 <!--button navigation arrow-->
@@ -1333,7 +1333,7 @@
                         <texture colordiffuse=$INFO[Window.Property(color)] flipy="false">arrow.png</texture>
                     </control>
                 </control> -->
-						
+
 			<control type="grouplist" id="9000">
 				<left>520</left>
 				<top>630</top>
@@ -1397,12 +1397,12 @@
 					<font>font12</font>
 					<height>40</height>
 					<width>auto</width>
-					<label>$ADDON[plugin.video.vstream 30460]</label>
+					<label>$ADDON[plugin.video.tvwatch2 30460]</label>
 					<textcolor>FFFFFFFF</textcolor>
 					<focusedcolor>FFFFFFFF</focusedcolor>
 					<texturenofocus border="10" diffuse="box.png" colordiffuse="D0FFFFFF">focus.png</texturenofocus>
 					<texturefocus border="10" diffuse="box.png" colordiffuse=$INFO[Window.Property(color)]>focus.png</texturefocus>
-					<animation reversible="false" center="auto" easing="inout" effect="zoom" end="100" start="90" time="400" tween="back">Focus</animation>					
+					<animation reversible="false" center="auto" easing="inout" effect="zoom" end="100" start="90" time="400" tween="back">Focus</animation>
 					<onclick>SetProperty(vstream_menu,Cast)</onclick>
 					<visible>!Player.HasMedia</visible>
 				</control>
@@ -1420,7 +1420,7 @@
 					<focusedcolor>FFFFFFFF</focusedcolor>
 					<texturenofocus border="10" diffuse="box.png" colordiffuse="D0FFFFFF">focus.png</texturenofocus>
 					<texturefocus border="10" diffuse="box.png" colordiffuse=$INFO[Window.Property(color)]>focus.png</texturefocus>
-					<animation reversible="false" center="auto" easing="inout" effect="zoom" end="100" start="90" time="400" tween="back">Focus</animation>					
+					<animation reversible="false" center="auto" easing="inout" effect="zoom" end="100" start="90" time="400" tween="back">Focus</animation>
 					<onclick>SetProperty(vstream_menu,Simil)</onclick>
 					<visible>!Player.HasMedia</visible>
 					<!--<onclick>SetFocus(5205)</onclick>-->
@@ -1474,14 +1474,14 @@
 					<font>font12</font>
 					<height>40</height>
 					<width>100</width>
-					
+
 					<textcolor>FFFFFFFF</textcolor>
 					<focusedcolor>$INFO[Window.Property(color)]</focusedcolor>
 					<label>Plein écran</label>
 
 					<texturenofocus />
 					<texturefocus />
-					
+
 					<onclick>SetFocus(40)</onclick>
 					<visible>Player.HasMedia</visible>
 				</control>

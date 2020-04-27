@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # vStream https://github.com/Kodi-vStream/venom-xbmc-addons
 
-# vstream = xbmcaddon.Addon('plugin.video.vstream')
-# sLibrary = VSPath(vstream.getAddonInfo("path")).decode("utf-8")
+# tvwatch2 = xbmcaddon.Addon('plugin.video.tvwatch2')
+# sLibrary = VSPath(tvwatch2.getAddonInfo("path")).decode("utf-8")
 # sys.path.append (sLibrary)
 from resources.lib.handler.requestHandler import cRequestHandler
 from resources.lib.comaddon import addon, dialog, VSlog, window, VSPath, xbmc
@@ -55,7 +55,7 @@ class cClear:
 
         elif (env == 'changelog_old'):
             try:
-                sUrl = 'https://raw.githubusercontent.com/Kodi-vStream/venom-xbmc-addons/master/plugin.video.vstream/changelog.txt'
+                sUrl = 'https://raw.githubusercontent.com/Kodi-vStream/venom-xbmc-addons/master/plugin.video.tvwatch2/changelog.txt'
                 oRequest = urllib2.Request(sUrl)
                 oResponse = urllib2.urlopen(oRequest)
 
@@ -127,7 +127,7 @@ class cClear:
                 def _close_dialog(self):
                     self.close()
 
-            path = "special://home/addons/plugin.video.vstream"
+            path = "special://home/addons/plugin.video.tvwatch2"
             wd = XMLDialog('DialogSelect.xml', path, "Default")
             wd.doModal()
             del wd
@@ -135,7 +135,7 @@ class cClear:
 
         elif (env == 'soutient'):
             try:
-                sUrl = 'https://raw.githubusercontent.com/Kodi-vStream/venom-xbmc-addons/master/plugin.video.vstream/soutient.txt'
+                sUrl = 'https://raw.githubusercontent.com/Kodi-vStream/venom-xbmc-addons/master/plugin.video.tvwatch2/soutient.txt'
                 oRequest = urllib2.Request(sUrl)
                 oResponse = urllib2.urlopen(oRequest)
 
@@ -152,7 +152,7 @@ class cClear:
 
         elif (env == 'addon'): # Vider le cache des métadonnées
             if self.DIALOG.VSyesno(self.ADDON.VSlang(30456)):
-                cached_Cache = "special://home/userdata/addon_data/plugin.video.vstream/video_cache.db"
+                cached_Cache = "special://home/userdata/addon_data/plugin.video.tvwatch2/video_cache.db"
                 # important seul xbmcvfs peux lire le special
                 try:
                     cached_Cache = VSPath(cached_Cache).decode("utf-8")
@@ -177,37 +177,39 @@ class cClear:
         elif (env == 'clean'):
             liste = ['Historiques', 'Lecture en cours', 'Marqués vues', 'Marque-Pages', 'Téléchargements']
             ret = self.DIALOG.VSselect(liste, self.ADDON.VSlang(30110))
-            cached_DB = "special://home/userdata/addon_data/plugin.video.vstream/vstream.db"
+            cached_DB = "special://home/userdata/addon_data/plugin.video.tvwatch2/tvwatch2.db"
             # important seul xbmcvfs peux lire le special
             try:
                 cached_DB = VSPath(cached_DB).decode("utf-8")
             except AttributeError:
                 cached_DB = VSPath(cached_DB)
 
-            sql_drop = ""
+            tables = []
 
             if ret > -1:
-
                 if ret == 0:
-                    sql_drop = 'DELETE FROM history'
+                    tables.append("tvshows")
                 elif ret == 1:
-                    sql_drop = 'DELETE FROM resume'
+                    tables.append("myResume")
+                    tables.append("seekTime")
                 elif ret == 2:
-                    sql_drop = 'DELETE FROM watched'
+                    tables.append("watched")
                 elif ret == 3:
-                    sql_drop = 'DELETE FROM favorite'
+                    tables.append("favorite")
                 elif ret == 4:
-                    sql_drop = 'DELETE FROM download'
+                    tables.append("download")
 
                 try:
                     db = sqlite.connect(cached_DB)
                     dbcur = db.cursor()
-                    dbcur.execute(sql_drop)
-                    db.commit()
+                    for table in tables:
+                        dbcur.execute("DROP TABLE %s" % table)
+                        db.commit()
                     dbcur.close()
                     db.close()
                     self.DIALOG.VSok(self.ADDON.VSlang(30090))
-                except:
+                except Exception as err:
+                    VSlog("Exception runscript sql_drop: {0}".format(err))
                     self.DIALOG.VSerror(self.ADDON.VSlang(30091))
             return
 
@@ -288,7 +290,7 @@ class cClear:
                         sPluginSettingsName = 'plugin_' + aPlugin[1]
                         bPlugin = self.ADDON.getSetting(sPluginSettingsName)
 
-                        icon = "special://home/addons/plugin.video.vstream/resources/art/sites/%s.png" % aPlugin[1]
+                        icon = "special://home/addons/plugin.video.tvwatch2/resources/art/sites/%s.png" % aPlugin[1]
                         stitle = aPlugin[0].replace('[COLOR violet]', '').replace('[COLOR orange]', '')\
                                            .replace('[/COLOR]', '').replace('[COLOR dodgerblue]', '')\
                                            .replace('[COLOR coral]', '')
@@ -346,7 +348,7 @@ class cClear:
                     # if action.getId() in (9, 10, 92, 216, 247, 257, 275, 61467, 61448):
                         # self.close()
 
-            path = "special://home/addons/plugin.video.vstream"
+            path = "special://home/addons/plugin.video.tvwatch2"
             wd = XMLDialog('DialogSelect.xml', path, "Default")
             wd.doModal()
             del wd
@@ -383,7 +385,7 @@ class cClear:
 
         elif (env == 'sauv'):
             select = self.DIALOG.VSselect(['Import', 'Export'])
-            DB = "special://home/userdata/addon_data/plugin.video.vstream/vstream.db"
+            DB = "special://home/userdata/addon_data/plugin.video.tvwatch2/tvwatch2.db"
             if select >= 0:
                 new = self.DIALOG.browse(3, 'vStream', "files")
                 if new:
@@ -391,10 +393,10 @@ class cClear:
                         if select == 0:
                             xbmcvfs.delete(DB)
                             # copy(source, destination)--copy file to destination, returns true/false.
-                            xbmcvfs.copy(new + 'vstream.db', DB)
+                            xbmcvfs.copy(new + 'tvwatch2.db', DB)
                         elif select == 1:
                             # copy(source, destination)--copy file to destination, returns true/false.
-                            xbmcvfs.copy(DB, new + 'vstream.db')
+                            xbmcvfs.copy(DB, new + 'tvwatch2.db')
                         self.DIALOG.VSinfo(self.ADDON.VSlang(30099))
                     except:
                         self.DIALOG.VSerror(self.ADDON.VSlang(30100))

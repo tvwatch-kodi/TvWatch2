@@ -110,7 +110,7 @@ class cRechercheHandler:
                 cDb().insert_history(meta)
         except: pass
 
-        sFolder = "special://home/addons/plugin.video.vstream/resources/sites"
+        sFolder = "special://home/addons/plugin.video.tvwatch2/resources/sites"
 
         sFolder = sFolder.replace('\\', '/')
         VSlog("Sites Folder: " + sFolder)
@@ -121,7 +121,7 @@ class cRechercheHandler:
         for sFileName in aFileNames:
             sPluginSettingsName = 'plugin_' + sFileName
             bPlugin = addons.getSetting(sPluginSettingsName)
-            if (bPlugin == 'true'):
+            if (bPlugin == 'true') or True:
                 aPlugin = self.importPlugin(sFileName, sCat)
                 if aPlugin:
                     aPlugins.append(aPlugin)

@@ -520,7 +520,7 @@ def decryptTime():
             oRequestHandler.addHeaderEntry('Cookie', Cookie)
         sHtmlContent = oRequestHandler.request()
 
-        downloaded_image = xbmcvfs.File("special://home/userdata/addon_data/plugin.video.vstream/challenge.png", 'wb')
+        downloaded_image = xbmcvfs.File("special://home/userdata/addon_data/plugin.video.tvwatch2/challenge.png", 'wb')
         downloaded_image.write(bytearray(sHtmlContent))
         downloaded_image.close()
 
@@ -530,13 +530,13 @@ def decryptTime():
                 oRequestHandler.addHeaderEntry('Cookie', Cookie)
             imgdata = oRequestHandler.request()
 
-            downloaded_image = xbmcvfs.File("special://home/userdata/addon_data/plugin.video.vstream/test" + str(i) + ".png", 'wb')
+            downloaded_image = xbmcvfs.File("special://home/userdata/addon_data/plugin.video.tvwatch2/test" + str(i) + ".png", 'wb')
             downloaded_image.write(bytearray(imgdata))
             downloaded_image.close()
-            Filename.append("special://home/userdata/addon_data/plugin.video.vstream/test" + str(i) + ".png")
+            Filename.append("special://home/userdata/addon_data/plugin.video.tvwatch2/test" + str(i) + ".png")
             i = i + 1
 
-        oSolver = cInputWindow(captcha=Filename, challenge="special://home/userdata/addon_data/plugin.video.vstream/challenge.png")
+        oSolver = cInputWindow(captcha=Filename, challenge="special://home/userdata/addon_data/plugin.video.tvwatch2/challenge.png")
         retArg = oSolver.get()
 
         data = "g-recaptcha-response=" + aResult[1][int(retArg)][0] + "&challenge=" + challengeTok
@@ -574,7 +574,7 @@ def decryptTime():
                             oHoster.setFileName(sMovieTitle)
                             cHosterGui().showHoster(oGui, oHoster, sHosterUrl, sThumb)
 
-            else:      
+            else:
                 oHoster = cHosterGui().checkHoster(aEntry)
                 if (oHoster != False):
                     oHoster.setDisplayName(sMovieTitle)
@@ -590,8 +590,8 @@ class cInputWindow(xbmcgui.WindowDialog):
         u = 0
         pos = []
 
-        bg_image = 'special://home/addons/plugin.video.vstream/resources/art/background.png'
-        check_image = 'special://home/addons/plugin.video.vstream/resources/art/trans_checked.png'
+        bg_image = 'special://home/addons/plugin.video.tvwatch2/resources/art/background.png'
+        check_image = 'special://home/addons/plugin.video.tvwatch2/resources/art/trans_checked.png'
 
         self.ctrlBackground = xbmcgui.ControlImage(0, 0, 1280, 720, bg_image)
         self.cancelled = False
@@ -610,7 +610,7 @@ class cInputWindow(xbmcgui.WindowDialog):
 
         self.img[2] = xbmcgui.ControlImage(450 + 520, 110, 260, 166, self.cptloc[2])
         self.addControl(self.img[2])
-        
+
         self.img[3] = xbmcgui.ControlImage(450, 110 + 166, 260, 166, self.cptloc[3])
         self.addControl(self.img[3])
 
