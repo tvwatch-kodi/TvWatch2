@@ -6,6 +6,7 @@ repo/plugin.video.vstream/Thumbs.db
 *.db
 *.db
 *.db
+*.orig
 plugin.video.vstream/resources/art/Thumbs.db
 .vscode/settings.json
 
