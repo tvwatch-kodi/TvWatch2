@@ -3,10 +3,36 @@
 #
 import urllib
 import urllib2
+import socket
 
 from urllib2 import HTTPError, URLError
 from resources.lib.comaddon import addon, dialog, VSlog
 
+prv_getaddrinfo = socket.getaddrinfo
+def new_getaddrinfo(*args):
+	dns_cache = {}
+	try:
+		import dns.resolver
+		host = args[0]
+		port = args[1]
+		VSlog((host, port))
+		a = 0
+		if "//" in host:
+			a = host.find("//")
+		b = 0
+		if "/" in host[a+2:]:
+			b = host[a+2:].find("/") + a + 2
+		if a != 0 or b != 0:
+			host = host[a:b]
+			VSlog((host, port))
+		resolver = dns.resolver.Resolver(configure=False)
+		resolver.nameservers = [ '80.67.169.12', '2001:910:800::12', '80.67.169.40', '2001:910:800::40' ]
+		answer = resolver.query(host, 'a')
+		host = str(answer[0])
+		return [(2, 1, 0, '', (host, port)), (2, 1, 0, '', (host, port))]
+	except Exception, e:
+		VSlog("new_getaddrinfo ERROR: " + e.message)
+		return prv_getaddrinfo(*args)
 
 class cRequestHandler:
     REQUEST_TYPE_GET = 0
@@ -29,6 +55,7 @@ class cRequestHandler:
         self.__bRemoveBreakLines = False
         self.__sResponseHeader = ''
         self.BUG_SSL = False
+        self.__enableDNS = False
 
     def removeNewLines(self, bRemoveNewLines):
         self.__bRemoveNewLines = bRemoveNewLines
@@ -105,6 +132,9 @@ class cRequestHandler:
         self.addHeaderEntry('Accept-Charset', 'ISO-8859-1,utf-8;q=0.7,*;q=0.7')
 
     def __callRequest(self):
+        if self.__enableDNS:
+            socket.getaddrinfo = new_getaddrinfo
+
         if self.__aParamatersLine:
             sParameters = self.__aParamatersLine
         else:
@@ -181,16 +211,25 @@ class cRequestHandler:
                     sContent = ''
 
             if not sContent:
-                self.DIALOG.VSerror("%s (%d),%s" % (self.ADDON.VSlang(30205), e.code, self.__sUrl))
+                VSlog("%s 1: (%d),%s" % (VSlang(30205), e.code , self.__sUrl))
+                if self.__enableDNS:
+                    socket.getaddrinfo = prv_getaddrinfo
+                    self.__enableDNS = False
                 return ''
 
         except urllib2.URLError, e:
+            VSlog("%s 2: (%s),%s" % (VSlang(30205), e.reason , self.__sUrl))
             if 'CERTIFICATE_VERIFY_FAILED' in str(e.reason) and self.BUG_SSL == False:
                 self.BUG_SSL = True
                 return self.__callRequest()
+            # elif 'getaddrinfo failed' in str(e.reason) and self.__enableDNS == False:
+            elif self.__enableDNS == False:
+                self.__enableDNS = True
+                return self.__callRequest()
 
-            self.DIALOG.VSerror("%s (%s),%s" % (self.ADDON.VSlang(30205), e.reason, self.__sUrl))
-            return ''
+        except Exception, e:
+			VSlog("%s 3: (%s),%s" % (VSlang(30205), e.message , self.__sUrl))
+			return ''
 
         if (self.__bRemoveNewLines == True):
             sContent = sContent.replace("\n", "")
@@ -198,6 +237,10 @@ class cRequestHandler:
 
         if (self.__bRemoveBreakLines == True):
             sContent = sContent.replace("&nbsp;", "")
+
+        if self.__enableDNS:
+            socket.getaddrinfo = prv_getaddrinfo
+            self.__enableDNS = False
 
         return sContent
 

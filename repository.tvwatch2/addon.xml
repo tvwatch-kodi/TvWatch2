@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addons>
+<addon id="plugin.video.tvwatch2" name="TvWatch2" version="1.0.13" provider-name="Primatech">
+		<requires>
+			<import addon="xbmc.python" version="2.24.0"/>
+			<import addon="script.module.simplejson" version="3.3.0"/>
+			<import addon="script.module.urlresolver" optional="true"/>
+			<import addon="script.module.requests" version="2.9.1"/>
+			<import addon="script.video.F4mProxy" optional="true"/>
+	<!-- Pour le DEBUG        <import addon="script.module.pydevd" version="4.4.0"/> -->
+		</requires>
+		<extension point="xbmc.python.pluginsource" library="default.py">
+			<provides>video</provides>
+		</extension>
+		<extension point="xbmc.service" library="service.py"/>
+		<extension point="xbmc.addon.metadata">
+			<summary lang="fr">TvWatch2</summary>
+			<description lang="fr">TvWatch2 est un module de streaming français, trouvez tous vos films, séries et mangas.</description>
+			<summary lang="en">TvWatch2</summary>
+			<description lang="en">TvWatch2 is a module for french streaming, find all your movies, TV shows and mangas.</description>
+			<platform>all</platform>
+			<license>GNU GENERAL PUBLIC LICENSE</license>
+			<source>https://github.com/tvwatch-kodi/TvWatch2/</source>
+			<assets>
+				<icon>icon.png</icon>
+				<fanart>fanart.jpg</fanart>
+				<screenshot>screenshot-01.jpg</screenshot>
+				<screenshot>screenshot-02.jpg</screenshot>
+				<screenshot>screenshot-03.jpg</screenshot>
+			</assets>
+		</extension>
+	</addon>
+
+	<addon id="repository.tvwatch2"
+			name="TvWatch2 Repository"
+			version="0.0.2"
+			provider-name="Primatech">
+		<extension point="xbmc.addon.repository" name="TvWatch2 XBMC Addon Repository">
+			<checksum>https://raw.githubusercontent.com/tvwatch-kodi/TvWatch2/dev/repository.tvwatch2/addon.xml.md5</checksum>
+			<info compressed="false">https://raw.githubusercontent.com/tvwatch-kodi/TvWatch2/dev/repository.tvwatch2/addon.xml</info>
+			<datadir zip="true">https://github.com/tvwatch-kodi/TvWatch2/raw/dev/repository.tvwatch2</datadir>
+		</extension>
+
+		<extension point="xbmc.addon.metadata">
+			<summary lang="fr">TvWatch2 Repository</summary>
+			<description lang="fr">Télécharger et Installer TvWatch2</description>
+			<summary lang="en">TvWatch2 Repository</summary>
+			<description lang="en">Download and install TvWatch2</description>
+			<platform>all</platform>
+		</extension>
+	</addon>
+</addons>

@@ -32,6 +32,9 @@ def GetURL_MAIN():
     # z = oInputParameterHandler.getAllParameter()
     # VSlog(z)
 
+    if not Sources or not sUrl:
+        return URL_HOST
+
     # quand vstream load tous les sites on passe >> globalSources
     # quand vstream load a partir du menu home on passe >> callplugin
     # quand vstream fabrique une liste de plugin pour menu(load site globalRun and call function search) >> search
@@ -469,7 +472,7 @@ def showMoviesLinks():
     oRequestHandler.addHeaderEntry('User-Agent', UA)
     oRequestHandler.addHeaderEntry('Accept-Encoding','gzip, deflate')
     sHtmlContent = oRequestHandler.request()
-    
+
     #Affichage du texte
     oGui.addText(SITE_IDENTIFIER, '[COLOR olive]Qualités disponibles pour ce film :[/COLOR]')
 
@@ -555,10 +558,10 @@ def showSeriesLinks():
     #on recherche d'abord la qualité courante
     sPattern = '<div style="[^"]+?">.+?Qualité (.+?) [|] (.+?)<.+?img src="(([^"]+))"'
     aResult = oParser.parse(sHtmlContent, sPattern)
- 
+
     sQual = ''
     sLang = ''
-    if (aResult[1]):    
+    if (aResult[1]):
         aEntry = aResult[1][0]
         sQual = aEntry[0]
         sLang = aEntry[1]
@@ -875,7 +878,7 @@ def DecryptDlProtecte(url):
         RestUrl = str(result[1][0][0])
         token = str(result[1][0][1])
         urlData = str(result[1][0][2])
-        
+
     else:
         sPattern = '<(.+?)action="([^"]+)" method="([^"]+)">.+?hidden".+?value="([^"]+)"'
         result = oParser.parse(sHtmlContent, sPattern)
@@ -915,11 +918,11 @@ def DecryptDlProtecte(url):
     oRequestHandler.addParameters("_token", token)
     #oRequestHandler.addParametersLine(data)
     sHtmlContent = oRequestHandler.request()
-    
+
     #fh = open('c:\\test.txt', "w")
     #fh.write(sHtmlContent)
     #fh.close()
-    
+
     return sHtmlContent
 
 #******************************************************************************

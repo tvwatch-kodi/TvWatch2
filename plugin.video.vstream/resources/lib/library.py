@@ -23,7 +23,7 @@ class cLibrary:
         if not self.__sMovieFolder:
             #PathCache = cConfig().getSettingCache()
             #self.__sMovieFolder = os.path.join(PathCache, 'Movies\\').decode('utf-8')
-            self.__sMovieFolder = 'special://userdata/addon_data/plugin.video.vstream/Films'
+            self.__sMovieFolder = 'special://userdata/addon_data/plugin.video.tvwatch2/Films'
             self.ADDON.setSetting('Library_folder_Movies', self.__sMovieFolder)
         if not xbmcvfs.exists(self.__sMovieFolder):
             xbmcvfs.mkdir(self.__sMovieFolder)
@@ -31,7 +31,7 @@ class cLibrary:
         if not self.__sTVFolder:
             #PathCache = cConfig().getSettingCache()
             #self.__sTVFolder = os.path.join(PathCache, 'TVs\\').decode('utf-8')
-            self.__sTVFolder = 'special://userdata/addon_data/plugin.video.vstream/Series'
+            self.__sTVFolder = 'special://userdata/addon_data/plugin.video.tvwatch2/Series'
             Self.ADDON.setSetting('Library_folder_TVs', self.__sTVFolder)
         if not xbmcvfs.exists(self.__sTVFolder):
             xbmcvfs.mkdir(self.__sTVFolder)
@@ -58,7 +58,7 @@ class cLibrary:
         sMediaUrl = QuotePlus(sMediaUrl)
         sFileName = QuotePlus(sFileName)
 
-        sLink = 'plugin://plugin.video.vstream/?function=play&site=cHosterGui&sFileName=' + sFileName + '&sMediaUrl=' + sMediaUrl + '&sHosterIdentifier=' + sHosterIdentifier
+        sLink = 'plugin://plugin.video.tvwatch2/?function=play&site=cHosterGui&sFileName=' + sFileName + '&sMediaUrl=' + sMediaUrl + '&sHosterIdentifier=' + sHosterIdentifier
 
         sTitle = sFileName
 
@@ -132,8 +132,8 @@ class cLibrary:
 
 
     def getLibrary(self):
-        xbmc.executebuiltin('Container.Update(special://userdata/addon_data/plugin.video.vstream/)', True)
-        #xbmc.executebuiltin('ActivateWindow(Videos, 'special://userdata/addon_data/plugin.video.vstream/')', True)
+        xbmc.executebuiltin('Container.Update(special://userdata/addon_data/plugin.video.tvwatch2/)', True)
+        #xbmc.executebuiltin('ActivateWindow(Videos, 'special://userdata/addon_data/plugin.video.tvwatch2/')', True)
         return True
 
 

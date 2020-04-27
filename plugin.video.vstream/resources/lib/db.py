@@ -19,7 +19,7 @@ except:
 
 class cDb:
 
-    DB = 'special://userdata/addon_data/plugin.video.vstream/vstream.db'
+    DB = 'special://userdata/addon_data/plugin.video.tvwatch2/tvwatch2.db'
     # important seul xbmcvfs peux lire le special
     REALDB = xbmc.translatePath(DB).decode('utf-8')
     DIALOG = dialog()
@@ -75,6 +75,15 @@ class cDb:
         #self.dbcur.execute(sql_create)
 
         sql_create = "CREATE TABLE IF NOT EXISTS download ("" addon_id integer PRIMARY KEY AUTOINCREMENT, ""title TEXT, ""url TEXT, ""path TEXT, ""cat TEXT, ""icon TEXT, ""size TEXT,""totalsize TEXT, ""status TEXT, ""UNIQUE(title, path)"");"
+        self.dbcur.execute(sql_create)
+
+        sql_create = "CREATE TABLE IF NOT EXISTS tvshows ("" addon_id integer PRIMARY KEY AUTOINCREMENT, ""display TEXT, ""title TEXT, ""url TEXT, ""UNIQUE(display)"");"
+        self.dbcur.execute(sql_create)
+
+        sql_create = "CREATE TABLE IF NOT EXISTS myResume ("" addon_id integer PRIMARY KEY AUTOINCREMENT, ""title TEXT, ""display TEXT, ""url TEXT, ""icon TEXT, ""UNIQUE(title)"");"
+        self.dbcur.execute(sql_create)
+
+        sql_create = "CREATE TABLE IF NOT EXISTS seekTime ("" addon_id integer PRIMARY KEY AUTOINCREMENT, ""display TEXT, ""time TEXT, ""UNIQUE(display)"");"
         self.dbcur.execute(sql_create)
 
         VSlog('Table initialized')

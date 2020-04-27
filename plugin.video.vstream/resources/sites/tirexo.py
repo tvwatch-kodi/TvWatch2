@@ -72,6 +72,7 @@ def GetURL_MAIN():
 
 #Teste pour le moment avec une url fixe.
 URL_MAIN = "https://www2.tirexo.com/"
+URL_SEARCH = (URL_MAIN + 'index.php?do=search&subaction=search&story=', 'showMovies')
 URL_SEARCH_MOVIES = (URL_MAIN + 'index.php?do=search&subaction=search&catlist=2&story=', 'showMovies')
 URL_SEARCH_SERIES = (URL_MAIN + 'index.php?do=search&subaction=search&catlist=15&story=', 'showMovies')
 URL_SEARCH_ANIMS = (URL_MAIN + 'index.php?do=search&subaction=search&catlist=32&story=', 'showMovies')
@@ -417,7 +418,7 @@ def showMovies(sSearch = ''):
             progress_.VSupdate(progress_, total)
             if progress_.iscanceled():
                 break
-                
+
             if 'collections/' in sUrl:
                 sUrl2 = aEntry[0]
                 sDesc = ""
@@ -519,7 +520,7 @@ def showCollec():
             progress_.VSupdate(progress_, total)
             if progress_.iscanceled():
                 break
-                
+
             sUrl2 = aEntry[0]
             sDesc = aEntry[1]
             sThumb = aEntry[2]
@@ -821,7 +822,7 @@ def showHosters():
             if aEntry[0]:
                 sHoster = re.sub('\.\w+', '', aEntry[0])
                 continue;
-            
+
             # filtrer les hosts connus
             oHoster = cHosterGui().checkHoster(sHoster)
             if not oHoster:
@@ -863,7 +864,7 @@ def showHostersLink():
             sHosterUrl = "https:" + aResult[1][0]
         else:
             sHosterUrl = aResult[1][0]
-            
+
         oHoster = cHosterGui().checkHoster(sHosterUrl)
         if (oHoster != False):
             oHoster.setDisplayName(sMovieTitle)
