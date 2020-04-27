@@ -10,11 +10,12 @@ from resources.lib.handler.rechercheHandler import cRechercheHandler
 from resources.lib.handler.inputParameterHandler import cInputParameterHandler
 from resources.lib.handler.outputParameterHandler import cOutputParameterHandler
 from resources.lib.db import cDb
-from resources.lib.comaddon import progress, VSlog, addon, window, xbmc
+from resources.lib.comaddon import progress, VSlog, addon, window, xbmc, VSupdate
 from resources.lib.util import Quote
+from tvwatch import cPatches
+
 # http://kodi.wiki/view/InfoLabels
 # http://kodi.wiki/view/List_of_boolean_conditions
-
 
 ####################
 #
@@ -61,14 +62,19 @@ if DEBUG:
 #     except ImportError:
 #         sys.stderr.write("Error: " + "You must add org.python.pydev.debug.pysrc to your PYTHONPATH.")
 
-
 class main:
 
     def __init__(self):
+        # Apply patch for Tvwatch
+        self.patches = cPatches()
+        self.patches.applyPatches()
+
         self.parseUrl()
         # Ne pas desactiver la ligne d'en dessous, car sinon ca genere
         # des probleme de Db sous Android.
         cDb()._create_tables()
+
+
 
     def parseUrl(self):
 
@@ -152,7 +158,7 @@ class main:
                 return
 
             if sSiteName == 'globalSearch':
-                searchGlobal()
+                self.patches.searchGlobal()
                 return
 
             if sSiteName == 'globalRun':
@@ -184,6 +190,7 @@ class main:
             if sSiteName == 'globalParametre':
                 addons = addon()
                 addons.openSettings()
+                VSupdate()
                 return
             # if isAboutGui(sSiteName, sFunction) == True:
                 # return
@@ -304,12 +311,12 @@ def searchGlobal():
 
     count = 0
     for plugin in aPlugins:
- 
+
         progress_.VSupdate(progress_, total, plugin['name'], True)
         if progress_.iscanceled():
             progress_.close()
             break
- 
+
         oGui.searchResults[:] = []  # vider le tableau de résultats pour les récupérer par source
         _pluginSearch(plugin, sSearchText)
 
@@ -320,7 +327,7 @@ def searchGlobal():
             oGui.addText(plugin['identifier'], '%s. [COLOR olive]%s[/COLOR]' % (count, plugin['name']), 'sites/%s.png' % (plugin['identifier']))
             for result in oGui.searchResults:
                 oGui.addFolder(result['guiElement'], result['params'])
- 
+
     if not count:   # aucune source ne retourne de résultats
         oGui.addText('globalSearch') # "Aucune information"
 
@@ -334,14 +341,14 @@ def _pluginSearch(plugin, sSearchText):
 
     # Appeler la source en mode Recherche globale
     window(10101).setProperty('search', 'true')
-    
+
     try:
         plugins = __import__('resources.sites.%s' % plugin['identifier'], fromlist = [plugin['identifier']])
         function = getattr(plugins, plugin['search'][1])
         sUrl = plugin['search'][0] + str(sSearchText)
-        
+
         function(sUrl)
-        
+
         VSlog('Load Search: ' + str(plugin['identifier']))
     except:
         VSlog(plugin['identifier'] + ': search failed')

@@ -2,8 +2,8 @@
 # https://github.com/Kodi-vStream/venom-xbmc-addons
 # Venom.
 
-# vstream = xbmcaddon.Addon('plugin.video.vstream')
-# sLibrary = xbmc.translatePath(vstream.getAddonInfo("path")).decode("utf-8")
+# tvwatch2 = xbmcaddon.Addon('plugin.video.tvwatch2')
+# sLibrary = xbmc.translatePath(tvwatch2.getAddonInfo("path")).decode("utf-8")
 # sys.path.append (sLibrary)
 
 from resources.lib.comaddon import addon, dialog, VSlog, xbmc, xbmcgui, window
@@ -51,7 +51,7 @@ class cClear:
 
         elif (env == 'changelog_old'):
             try:
-                sUrl = 'https://raw.githubusercontent.com/Kodi-vStream/venom-xbmc-addons/master/plugin.video.vstream/changelog.txt'
+                sUrl = 'https://raw.githubusercontent.com/Kodi-vStream/venom-xbmc-addons/master/plugin.video.tvwatch2/changelog.txt'
                 oRequest = urllib2.Request(sUrl)
                 oResponse = urllib2.urlopen(oRequest)
                 sContent = oResponse.read()
@@ -112,7 +112,7 @@ class cClear:
                     self.close()
 
             # path = cConfig().getAddonPath()
-            path = "special://home/addons/plugin.video.vstream"
+            path = "special://home/addons/plugin.video.tvwatch2"
             wd = XMLDialog('DialogSelect.xml', path, "Default")
             wd.doModal()
             del wd
@@ -120,7 +120,7 @@ class cClear:
 
         elif (env == 'soutient'):
             try:
-                sUrl = 'https://raw.githubusercontent.com/Kodi-vStream/venom-xbmc-addons/master/plugin.video.vstream/soutient.txt'
+                sUrl = 'https://raw.githubusercontent.com/Kodi-vStream/venom-xbmc-addons/master/plugin.video.tvwatch2/soutient.txt'
                 oRequest =  urllib2.Request(sUrl)
                 oResponse = urllib2.urlopen(oRequest)
                 sContent = oResponse.read()
@@ -133,7 +133,7 @@ class cClear:
             if self.DIALOG.VSyesno(self.ADDON.VSlang(30456)):
                 # cached_Cache = cConfig().getFileCache()
                 # cached_Cache = xbmc.translatePath(cached_Cache).decode("utf-8")
-                cached_Cache = "special://home/userdata/addon_data/plugin.video.vstream/video_cache.db"
+                cached_Cache = "special://home/userdata/addon_data/plugin.video.tvwatch2/video_cache.db"
                 # self.ClearDir2(cached_Cache, True)
                 try:
                     xbmcvfs.delete(cached_Cache)
@@ -147,7 +147,7 @@ class cClear:
             liste = ['Historiques', 'Lecture en cours', 'Marqués vues', 'Marque-Pages', 'Téléchargements']
             ret = self.DIALOG.select(self.ADDON.VSlang(30110), liste)
             # cached_DB = cConfig().getFileDB()
-            cached_DB = "special://home/userdata/addon_data/plugin.video.vstream/vstream.db"
+            cached_DB = "special://home/userdata/addon_data/plugin.video.tvwatch2/tvwatch2.db"
             # important seul xbmcvfs peux lire le special
             cached_DB = xbmc.translatePath(cached_DB).decode("utf-8")
 
@@ -156,9 +156,9 @@ class cClear:
             if ret > -1:
 
                 if ret == 0:
-                    sql_drop = "DROP TABLE history"
+                    sql_drop = "DROP TABLE tvshows"
                 elif ret == 1:
-                    sql_drop = "DROP TABLE resume"
+                    sql_drop = "DROP TABLE myResume"
                 elif ret == 2:
                     sql_drop = "DROP TABLE watched"
                 elif ret == 3:
@@ -265,7 +265,7 @@ class cClear:
                         bPlugin = self.ADDON.getSetting(sPluginSettingsName)
 
                         # icon = os.path.join(unicode(cConfig().getRootArt(), 'utf-8'), 'sites', aPlugin[1] + '.png')
-                        icon = "special://home/addons/plugin.video.vstream/resources/art/sites/%s.png" % aPlugin[1]
+                        icon = "special://home/addons/plugin.video.tvwatch2/resources/art/sites/%s.png" % aPlugin[1]
                         stitle = aPlugin[0].replace('[COLOR violet]', '').replace('[COLOR orange]', '').replace('[/COLOR]', '').replace('[COLOR dodgerblue]', '').replace('[COLOR coral]', '')
                         if (bPlugin == 'true'):
                             stitle = ('%s %s') % (stitle, valid)
@@ -322,7 +322,7 @@ class cClear:
                         # self.close()
 
             # path = cConfig().getAddonPath()
-            path = "special://home/addons/plugin.video.vstream"
+            path = "special://home/addons/plugin.video.tvwatch2"
             wd = XMLDialog('DialogSelect.xml', path, "Default")
             wd.doModal()
             del wd
@@ -376,7 +376,7 @@ class cClear:
         elif (env == 'sauv'):
             # dialog.select('Choose a playlist', ['Playlist #1', 'Playlist #2, 'Playlist #3'])
             select = self.DIALOG.VSselect(['Import', 'Export'])
-            DB = "special://home/userdata/addon_data/plugin.video.vstream/vstream.db"
+            DB = "special://home/userdata/addon_data/plugin.video.tvwatch2/tvwatch2.db"
             if select >= 0:
                 new = self.DIALOG.browse(3, 'vStream', "files")
                 if new:
@@ -384,10 +384,10 @@ class cClear:
                         if select == 0:
                             xbmcvfs.delete(DB)
                             # copy(source, destination)--copy file to destination, returns true/false.
-                            xbmcvfs.copy(new + 'vstream.db', DB)
+                            xbmcvfs.copy(new + 'tvwatch2.db', DB)
                         elif select == 1:
                             # copy(source, destination)--copy file to destination, returns true/false.
-                            xbmcvfs.copy(DB, new + 'vstream.db')
+                            xbmcvfs.copy(DB, new + 'tvwatch2.db')
                         self.DIALOG.VSinfo(self.ADDON.VSlang(30099))
                     except:
                         self.DIALOG.VSerror(self.ADDON.VSlang(30100))
