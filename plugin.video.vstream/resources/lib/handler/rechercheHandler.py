@@ -143,7 +143,7 @@ class cRechercheHandler:
         #sFolder =  self.getRootFolder()
         #sFolder = os.path.join(sFolder, 'resources/sites')
         
-        sFolder = "special://home/addons/plugin.video.vstream/resources/sites"
+        sFolder = "special://home/addons/plugin.video.tvwatch2/resources/sites"
 
         # xbox hack
         sFolder = sFolder.replace('\\', '/')

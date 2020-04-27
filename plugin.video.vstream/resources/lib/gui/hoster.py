@@ -95,7 +95,7 @@ class cHosterGui:
                 oGuiElement.addContextItem(oContext)
 
         # Upload menu uptobox
-        if cInputParameterHandler().getValue('site') != 'siteuptobox' and self.ADDON.getSetting('hoster_uptobox_premium') == 'true':
+        if cInputParameterHandler().getValue('site') != 'siteuptobox' and self.ADDON.VSsetting('hoster_uptobox_premium') == 'true':
             host = oHoster.getPluginIdentifier()
             accept = ['uptobox', 'uptostream', 'onefichier', 'uploaded', 'uplea']
             for i in accept:
@@ -103,7 +103,7 @@ class cHosterGui:
                     oGui.CreateSimpleMenu(oGuiElement, oOutputParameterHandler, 'siteuptobox', 'siteuptobox', 'UptomyAccount', self.ADDON.VSlang(30325))
 
         # onefichier
-        if cInputParameterHandler().getValue('site') != 'siteonefichier' and self.ADDON.getSetting('hoster_onefichier_premium') == 'true':
+        if cInputParameterHandler().getValue('site') != 'siteonefichier' and self.ADDON.VSsetting('hoster_onefichier_premium') == 'true':
             host = oHoster.getPluginIdentifier()
             accept = 'onefichier'  # les autres ne fonctionnent pas
             if host == accept:
@@ -135,7 +135,7 @@ class cHosterGui:
             sHostName = sHosterUrl
 
         # L'user a active l'url resolver ?
-        if self.ADDON.getSetting('UserUrlResolver') == 'true':
+        if self.ADDON.VSsetting('UserUrlResolver') == 'true':
             import urlresolver
             hmf = urlresolver.HostedMediaFile(url = sHosterUrl)
             if hmf.valid_url():
@@ -329,9 +329,9 @@ class cHosterGui:
         if ('dustreaming' in sHostName):
             return self.getHoster('dustreaming')
         #frenchvid et clone
-        if ('french-vid' in sHostName or 'yggseries' in sHostName:
+        if ('french-vid' in sHostName) or ('yggseries' in sHostName):
             return self.getHoster('frenchvid')
-        if ('fembed' in sHostName) or 'fem.tohds' in sHostName):
+        if ('fembed' in sHostName) or ('fem.tohds' in sHostName):
             return self.getHoster('frenchvid')
         if ('feurl' in sHostName) or 'fsimg' in sHostName:
             return self.getHoster('frenchvid')

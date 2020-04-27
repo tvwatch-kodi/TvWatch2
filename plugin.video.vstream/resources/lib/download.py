@@ -304,7 +304,7 @@ class cDownload:
         oHoster = cHosterGui().checkHoster(sDBUrl)
         oHoster.setUrl(sDBUrl)
         aLink = oHoster.getMediaLink()
-        # aLink = (True,'https://github.com/LordVenom/venom-xbmc-addons-beta/blob/master/plugin.video.vstream/Thumbs.db?raw=true')
+        # aLink = (True,'https://github.com/LordVenom/venom-xbmc-addons-beta/blob/master/plugin.video.tvwatch2/Thumbs.db?raw=true')
 
         if aLink[0]:
             sUrl = aLink[1]
@@ -363,7 +363,7 @@ class cDownload:
         sPluginPath = cPluginHandler().getPluginPath()
         sItemUrl = '%s?site=%s&function=%s&title=%s' % (sPluginPath, SITE_IDENTIFIER, 'StartDownloadList', 'title')
         meta = {'title': 'Démarrer la liste'}
-        item = xbmcgui.ListItem('Démarrer la liste', iconImage = 'special://home/addons/plugin.video.vstream/resources/art/download.png')
+        item = xbmcgui.ListItem('Démarrer la liste', iconImage = 'special://home/addons/plugin.video.tvwatch2/resources/art/download.png')
 
         # item.setInfo(type='Video', infoLabels=meta)
         # item.setProperty('Video', 'false')
