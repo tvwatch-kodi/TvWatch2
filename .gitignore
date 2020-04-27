@@ -1,9 +1,18 @@
 *.pyo
 *.pyo
 *.pyo
+*.pyc
 repo/plugin.video.vstream/Thumbs.db
 *.db
 *.db
 *.db
 plugin.video.vstream/resources/art/Thumbs.db
 .vscode/settings.json
+
+#ignore files
+tvwatch.txt
+
+#ignore folders
+private/
+releases/
+tutorials/

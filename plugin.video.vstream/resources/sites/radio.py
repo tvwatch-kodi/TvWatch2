@@ -27,7 +27,7 @@ headers = {'User-Agent': USER_AGENT,
 icon = 'tv.png'
 #/home/lordvenom/.kodi/
 #sRootArt = cConfig().getRootArt()
-sRootArt = 'special://home/addons/plugin.video.vstream/resources/art/tv'
+sRootArt = 'special://home/addons/plugin.video.tvwatch2/resources/art/tv'
 ADDON = addon()
 
 class track():
@@ -94,7 +94,7 @@ def parseWebM3U():#Traite les m3u
     playlist=[]
     song = track(None, None, None, None)
 
-    sFile = 'special://home/addons/plugin.video.vstream/resources/extra/radio.xspf'
+    sFile = 'special://home/addons/plugin.video.tvwatch2/resources/extra/radio.xspf'
 
     if not xbmcvfs.exists(sFile):
         return

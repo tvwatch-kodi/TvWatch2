@@ -13,7 +13,7 @@ def service():
     if record_is_activate == 'false':
         return
 
-    path_recording = 'special://userdata/addon_data/plugin.video.vstream/Enregistrement'
+    path_recording = 'special://userdata/addon_data/plugin.video.tvwatch2/Enregistrement'
     path = ''.join([path_recording])
     if not xbmcvfs.exists(path):
         xbmcvfs.mkdir(path)
