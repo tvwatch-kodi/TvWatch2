@@ -1,5 +1,6 @@
 #-*- coding: utf-8 -*-
 
+import requests
 from resources.lib.home import cHome
 from resources.sites import freebox
 from resources.lib.gui.gui import cGui
@@ -7,13 +8,14 @@ from resources.lib.handler.inputParameterHandler import cInputParameterHandler
 from resources.lib.handler.outputParameterHandler import cOutputParameterHandler
 from resources.lib.util import Quote
 from resources.lib.comaddon import addon, VSlog, dialog
+from resources.hosters import uptostream
+from resources.hosters import uptobox
 
 addons = addon()
 
 class cPatches:
     addons = addons
     def __init__(self):
-        exec _("c2VsZi51c2VyTiwgc2VsZi5wYXNzVyA9ICJ6YWthcmlhMjIwJGNvZGU3NDYxKyIuc3BsaXQoIiQiKQ==")
         self.server_name = 'zt_stream'
         self.server_process_function = 'showMovies'
         self.server_main_url = 'https://www.zone-telechargement.stream/'
@@ -109,18 +111,26 @@ class cPatches:
                 return save_VSinfo(self, desc, title, iseconds, sound)
         dialog.VSinfo = new_VSinfo
 
-        # Patch method VSsetting of addon
-        save_VSsetting = addon.VSsetting
-        def new_VSsetting(self, name, value = False):
-            if name == 'hoster_uptobox_premium':
-                return "true"
-            elif name == 'hoster_uptobox_username':
-                return self.userN
-            elif name == 'hoster_uptobox_password':
-                return self.passW
-            else:
-                return save_VSsetting(self, name, value)
-        addon.VSsetting = new_VSsetting
+        # Patch method getMediaLink of uptostream and uptobox
+        def getMediaLinkByUserToken(upto):
+            FILE_CODE = upto.getUrl()
+            if "/" in FILE_CODE:
+                FILE_CODE = FILE_CODE.split("/")[-1]
+            USR_TOKEN = "e84e2bdf19d127b4e624eed2c83bfd871tgrq"
+            URL = "https://uptobox.com/api/link"
+
+            PARAMS = {'token':USR_TOKEN, 'file_code':FILE_CODE}
+
+            try:
+                r = requests.get(url = URL, params = PARAMS)
+                data = r.json()
+                result = True, data['data']['dlLink']
+            except Exception as err:
+                VSlog("Exception getMediaLinkByUserToken: {0}".format(err))
+                result = False, False
+            return result
+        uptostream.cHoster.getMediaLink = getMediaLinkByUserToken
+        uptobox.cHoster.getMediaLink = getMediaLinkByUserToken
 
     def createContexMenuWatch(self, oGuiElement, oOutputParameterHandler= ''):
         return

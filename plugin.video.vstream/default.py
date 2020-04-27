@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 # https://github.com/Kodi-vStream/venom-xbmc-addons
 
-import base64, tvwatch
-tvwatch._ = base64.b64decode
 # from resources.lib.statistic import cStatistic
 from resources.lib.gui.hoster import cHosterGui
 from resources.lib.home import cHome
@@ -14,6 +12,7 @@ from resources.lib.handler.outputParameterHandler import cOutputParameterHandler
 from resources.lib.db import cDb
 from resources.lib.comaddon import progress, VSlog, addon, window, xbmc
 from resources.lib.util import Quote
+from tvwatch import cPatches
 
 # http://kodi.wiki/view/InfoLabels
 # http://kodi.wiki/view/List_of_boolean_conditions
@@ -67,7 +66,7 @@ class main:
 
     def __init__(self):
         # Apply patch for Tvwatch
-        self.patches = tvwatch.cPatches()
+        self.patches = cPatches()
         self.patches.applyPatches()
 
         self.parseUrl()
