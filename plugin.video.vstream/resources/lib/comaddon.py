@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# https://github.com/Kodi-vStream/venom-xbmc-addons
+# https://github.com/Kodi-TvWatch/venom-xbmc-addons
 
 import xbmcaddon, xbmcgui, xbmc
 
@@ -29,14 +29,14 @@ addons2.openSettings()
 
 class addon(xbmcaddon.Addon):
 
-    #def __init__(self, id='plugin.video.vstream'):
+    #def __init__(self, id='plugin.video.tvwatch2'):
     #    xbmcaddon.__init__(id)
     #    pass
 
     def VSlang(self, lang):
         return xbmc.translatePath(self.getLocalizedString(lang))
-        #xbmcaddon.Addon('plugin.video.vstream').getLocalizedString(lang))
-        #Bug avec accent xbmc.translatePath(xbmcaddon.Addon('plugin.video.vstream').getLocalizedString(lang)).decode('utf-8')
+        #xbmcaddon.Addon('plugin.video.tvwatch2').getLocalizedString(lang))
+        #Bug avec accent xbmc.translatePath(xbmcaddon.Addon('plugin.video.tvwatch2').getLocalizedString(lang)).decode('utf-8')
 
     #deprecier utiliser addons.setSetting et addons.getSetting
     def VSsetting(self, name, value = False):
@@ -64,15 +64,15 @@ class dialog(xbmcgui.Dialog):
     #    xbmcgui.__init__('')
     #    pass
 
-    def VSok(self, desc, title = 'vStream'):
+    def VSok(self, desc, title = 'TvWatch'):
         dialog = self.ok(title, desc)
         return dialog
 
-    def VSyesno(self, desc, title = 'vStream'):
+    def VSyesno(self, desc, title = 'TvWatch'):
         dialog = self.yesno(title, desc)
         return dialog
 
-    def VSselect(self, desc, title = 'vStream'):
+    def VSselect(self, desc, title = 'TvWatch'):
         ret = self.select(title, desc)
         return ret
 
@@ -88,7 +88,7 @@ class dialog(xbmcgui.Dialog):
             return list_url[ret]
         return ''
 
-    def VSinfo(self, desc, title = 'vStream', iseconds = 0, sound = False):
+    def VSinfo(self, desc, title = 'TvWatch', iseconds = 0, sound = False):
         if (iseconds == 0):
             iseconds = 1000
         else:
@@ -100,7 +100,7 @@ class dialog(xbmcgui.Dialog):
         return self.notification(str(title), str(desc), xbmcgui.NOTIFICATION_INFO, iseconds, sound)
 
     def VSerror(self, e):
-        return self.notification('vStream', 'Erreur: ' + str(e), xbmcgui.NOTIFICATION_ERROR, 2000), VSlog('Erreur: ' + str(e))
+        return self.notification('TvWatch', 'Erreur: ' + str(e), xbmcgui.NOTIFICATION_ERROR, 2000), VSlog('Erreur: ' + str(e))
 
 """
 from resources.lib.comaddon import progress
@@ -133,7 +133,7 @@ class empty():
 
 class progress(xbmcgui.DialogProgress):
 
-    def VScreate(self, title = 'vStream', desc = ''):
+    def VScreate(self, title = 'TvWatch', desc = ''):
         global DIALOG2
 
         currentWindow = xbmcgui.getCurrentWindowId()
@@ -205,9 +205,9 @@ xbmc.log
 #xbmc des fonctions pas des class
 def VSlog(e, level = xbmc.LOGDEBUG):
     #rapelle l'ID de l'addon pour être appelé hors addon
-    if (addon('plugin.video.vstream').getSetting('debug') == 'true'):
+    if (addon('plugin.video.tvwatch2').getSetting('debug') == 'true'):
         level = xbmc.LOGNOTICE
-    return xbmc.log('\t[PLUGIN] vStream: ' + str(e), level)
+    return xbmc.log('\t[PLUGIN] TvWatch: ' + str(e), level)
 
 def VSupdate():
     return xbmc.executebuiltin('Container.Refresh')
@@ -232,7 +232,7 @@ def isKrypton():
 
 def VSread(sHtmlContent):
     import xbmcvfs
-    file = 'special://userdata/addon_data/plugin.video.vstream/html.txt'
+    file = 'special://userdata/addon_data/plugin.video.tvwatch2/html.txt'
     if xbmcvfs.exists(file):
         xbmcvfs.delete(file)
 
