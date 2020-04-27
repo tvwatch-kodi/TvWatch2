@@ -314,7 +314,7 @@ def showMovies(sSearch = ''):
     else:
         oInputParameterHandler = cInputParameterHandler()
         sUrl = oInputParameterHandler.getValue('siteUrl')
-        
+
     oRequestHandler = cRequestHandler(sUrl.replace('https','http'))
     oRequestHandler.addHeaderEntry('User-Agent', UA)
     oRequestHandler.addHeaderEntry('Accept-Encoding','gzip, deflate')
@@ -393,7 +393,7 @@ def showMovies(sSearch = ''):
                 oGui.addNext(SITE_IDENTIFIER, 'showMovies', '[COLOR teal]Suivant >>>[/COLOR]', oOutputParameterHandler)
 
     if not sSearch:
-        oGui.setEndOfDirectory()
+        oGui.setEndOfDirectory(500)
 
 def __checkForNextPage(sHtmlContent):
     oParser = cParser()
@@ -421,7 +421,7 @@ def showMoviesLinks():
     oRequestHandler.addHeaderEntry('User-Agent', UA)
     oRequestHandler.addHeaderEntry('Accept-Encoding','gzip, deflate')
     sHtmlContent = oRequestHandler.request()
-    
+
     # Affichage du texte
     oGui.addText(SITE_IDENTIFIER, '[COLOR olive]Qualités disponibles pour ce film :[/COLOR]')
 
@@ -506,10 +506,10 @@ def showSeriesLinks():
     # On recherche d'abord la qualité courante
     sPattern = '<div style="[^"]+?">.+?Qualité (.+?) [|] (.+?)<.+?img src="(([^"]+))"'
     aResult = oParser.parse(sHtmlContent, sPattern)
- 
+
     sQual = ''
     sLang = ''
-    if (aResult[1]):    
+    if (aResult[1]):
         aEntry = aResult[1][0]
         sQual = aEntry[0]
         sLang = aEntry[1]
@@ -596,7 +596,7 @@ def showHosters():
     aResult = oParser.parse(sHtmlContent, sPattern)
 
     if aResult[0]:
-        sUrl = aResult[1][0]    # Un seul lien, on va directement chercher le hoster 
+        sUrl = aResult[1][0]    # Un seul lien, on va directement chercher le hoster
         sHosterUrl = get_protected_link(sUrl)
         oHoster = cHosterGui().checkHoster(sHosterUrl)
         if (oHoster != False):
@@ -604,7 +604,7 @@ def showHosters():
             oHoster.setFileName(sMovieTitle)
             cHosterGui().showHoster(oGui, oHoster, sHosterUrl, sThumb)
 
-    oGui.setEndOfDirectory()
+    oGui.setEndOfDirectory(50)
 
 def showSeriesHosters():
     oGui = cGui()
@@ -634,7 +634,7 @@ def showSeriesHosters():
             sHosterUrl = get_protected_link(sUrl)
             oHoster = cHosterGui().checkHoster(sHosterUrl)
             if (oHoster != False):
-                sDisplayTitle = 'Episode %s' % (numEpisode) 
+                sDisplayTitle = 'Episode %s' % (numEpisode)
                 oHoster.setDisplayName(sDisplayTitle)
                 oHoster.setFileName(sMovieTitle)
                 cHosterGui().showHoster(oGui, oHoster, sHosterUrl, sThumb)
@@ -697,7 +697,7 @@ def DecryptDlProtecte(url):
         RestUrl = str(result[1][0][0])
         token = str(result[1][0][1])
         # urlData = str(result[1][0][2])
-        
+
     else:
         sPattern = '<(.+?)action="([^"]+)" method="([^"]+)">.+?hidden".+?value="([^"]+)"'
         result = oParser.parse(sHtmlContent, sPattern)
@@ -711,7 +711,7 @@ def DecryptDlProtecte(url):
                 RestUrl = str(result[1][1][1]).replace("}",'%7D')
                 method = str(result[1][1][2])
                 token = str(result[1][1][3])
-    
+
             if RestUrl.startswith('/'):
                 RestUrl = 'https://' + url.split('/')[2] + RestUrl
 
@@ -720,6 +720,5 @@ def DecryptDlProtecte(url):
         oRequestHandler.setRequestType(1)
     oRequestHandler.addParameters("_token", token)
     sHtmlContent = oRequestHandler.request()
-    
-    return sHtmlContent
 
+    return sHtmlContent

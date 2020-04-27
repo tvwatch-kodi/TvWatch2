@@ -21,7 +21,7 @@ except:
 
 class cTMDb:
     URL = 'http://api.themoviedb.org/3/'
-    CACHE = 'special://userdata/addon_data/plugin.video.vstream/video_cache.db'
+    CACHE = 'special://userdata/addon_data/plugin.video.tvwatch2/video_cache.db'
     #important seul xbmcvfs peux lire le special
     REALCACHE = xbmc.translatePath(CACHE).decode('utf-8')
     

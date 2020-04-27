@@ -36,7 +36,7 @@ headers = {'User-Agent': UA,
 icon = 'tv.png'
 #/home/lordvenom/.kodi/
 #sRootArt = cConfig().getRootArt()
-sRootArt = 'special://home/addons/plugin.video.vstream/resources/art/tv'
+sRootArt = 'special://home/addons/plugin.video.tvwatch2/resources/art/tv'
 ADDON = addon()
 
 class track():
