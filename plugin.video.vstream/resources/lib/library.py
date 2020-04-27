@@ -21,13 +21,13 @@ class cLibrary:
         self.__sTVFolder = self.ADDON.getSetting('Library_folder_TVs')
 
         if not self.__sMovieFolder:
-            self.__sMovieFolder = 'special://userdata/addon_data/plugin.video.vstream/Films'
+            self.__sMovieFolder = 'special://userdata/addon_data/plugin.video.tvwatch2/Films'
             self.ADDON.setSetting('Library_folder_Movies', self.__sMovieFolder)
         if not xbmcvfs.exists(self.__sMovieFolder):
             xbmcvfs.mkdir(self.__sMovieFolder)
 
         if not self.__sTVFolder:
-            self.__sTVFolder = 'special://userdata/addon_data/plugin.video.vstream/Series'
+            self.__sTVFolder = 'special://userdata/addon_data/plugin.video.tvwatch2/Series'
             self.ADDON.setSetting('Library_folder_TVs', self.__sTVFolder)
         if not xbmcvfs.exists(self.__sTVFolder):
             xbmcvfs.mkdir(self.__sTVFolder)
@@ -57,7 +57,7 @@ class cLibrary:
 
         sFileNameEncode = QuotePlus(sFileName)
 
-        sLink = 'plugin://plugin.video.vstream/?function=play&site=cHosterGui&sFileName=' + sFileNameEncode + '&sMediaUrl=' + sMediaUrl + '&sHosterIdentifier=' + sHosterIdentifier
+        sLink = 'plugin://plugin.video.tvwatch2/?function=play&site=cHosterGui&sFileName=' + sFileNameEncode + '&sMediaUrl=' + sMediaUrl + '&sHosterIdentifier=' + sHosterIdentifier
 
         sTitle = sFileName
 
@@ -103,7 +103,7 @@ class cLibrary:
             self.DIALOG.VSinfo('Rajout impossible')
 
     def getLibrary(self):
-        xbmc.executebuiltin('Container.Update(special://userdata/addon_data/plugin.video.vstream/)', True)
+        xbmc.executebuiltin('Container.Update(special://userdata/addon_data/plugin.video.tvwatch2/)', True)
         return True
 
     def Delfile(self):

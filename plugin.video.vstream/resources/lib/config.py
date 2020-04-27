@@ -15,7 +15,7 @@ import time
 
 
 class GestionCookie():
-    PathCache = 'special://userdata/addon_data/plugin.video.vstream'
+    PathCache = 'special://userdata/addon_data/plugin.video.tvwatch2'
     
     def MakeListwithCookies(self,c):
         t = {}
@@ -102,7 +102,7 @@ class cConfig():
         # self.__sIcon = os.path.join(self.__oPath,'resources', 'art','icon.png')
         # self.__sFanart = os.path.join(self.__oPath,'resources','art','fanart.jpg')
         # self.__sFileFav = os.path.join(self.__oCache,'favourite.db').decode('utf-8')
-        # self.__sFileDB = os.path.join(self.__oCache,'vstream.db').decode('utf-8')
+        # self.__sFileDB = os.path.join(self.__oCache,'tvwatch2.db').decode('utf-8')
         # self.__sFileCache = os.path.join(self.__oCache,'video_cache.db').decode('utf-8')
 
     def isDharma(self):
@@ -486,7 +486,7 @@ def WindowsBoxes(sTitle, sFileName, metaType, year=''):
             if action.getId() in (9, 10, 11, 30, 92, 216, 247, 257, 275, 61467, 61448):
                 self.close()
 
-    path = 'special://home/addons/plugin.video.vstream'
+    path = 'special://home/addons/plugin.video.tvwatch2'
     # self.__oPath.decode('utf-8')
     wd = XMLDialog('DialogInfo4.xml', path, 'default', '720p')
     wd.doModal()

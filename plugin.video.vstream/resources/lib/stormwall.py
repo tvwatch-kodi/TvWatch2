@@ -11,7 +11,7 @@ try:  # Python 2
 except ImportError:  # Python 3
     import urllib.request as urllib2
 
-PathCache = VSPath(xbmcaddon.Addon('plugin.video.vstream').getAddonInfo('profile'))
+PathCache = VSPath(xbmcaddon.Addon('plugin.video.tvwatch2').getAddonInfo('profile'))
 UA = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0'
 
 class Stormwall(object):
@@ -169,7 +169,7 @@ class Stormwall(object):
         oRequestHandler.addHeaderEntry('User-Agent', UA)
         oRequestHandler.addHeaderEntry('Accept-Encoding', 'gzip, deflate')
         if cookies:
-            oRequestHandler.addHeaderEntry('Cookie', cookies)        
+            oRequestHandler.addHeaderEntry('Cookie', cookies)
         oRequestHandler.addHeaderEntry('Referer', url)
         if data:
             for d in data:
