@@ -12,7 +12,7 @@ def service():
     if recordIsActivate == 'false':
         return
 
-    pathRecording = 'special://userdata/addon_data/plugin.video.vstream/Enregistrement'
+    pathRecording = 'special://userdata/addon_data/plugin.video.tvwatch2/Enregistrement'
     path = ''.join([pathRecording])
     if not xbmcvfs.exists(path):
         xbmcvfs.mkdir(path)
@@ -24,7 +24,7 @@ def service():
     monitor = xbmc.Monitor()
 
     del ADDON
-    
+
     while not monitor.abortRequested() and not recordInProgress == True:
         if monitor.waitForAbort(int(interval)):
             break

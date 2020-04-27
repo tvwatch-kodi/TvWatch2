@@ -119,7 +119,7 @@ class cGui:
 
     # Affichage d'un épisode, sans recherche de Métadonnées, et menu adapté
     def addEpisode(self, sId, sFunction, sLabel, sIcon, sThumbnail, sDesc, oOutputParameterHandler=''):
-        
+
         # comportement proche de addMisc
         self.addMisc(sId, sFunction, sLabel, sIcon, sThumbnail, sDesc, oOutputParameterHandler, sCat=2)
         cGui.CONTENT = 'files'
@@ -220,8 +220,8 @@ class cGui:
         oOutputParameterHandler.addParameter('sFav', sFunction)
 
         # context parametre
-#        if isKrypton():
-#            self.createContexMenuSettings(oGuiElement, oOutputParameterHandler)
+        if isKrypton():
+            self.createContexMenuSettings(oGuiElement, oOutputParameterHandler)
 
         try:
             self.addFolder(oGuiElement, oOutputParameterHandler)
@@ -629,9 +629,12 @@ class cGui:
     def viewBA(self):
         oInputParameterHandler = cInputParameterHandler()
         sFileName = oInputParameterHandler.getValue('sFileName')
+        sTitle = oInputParameterHandler.getValue('sTitle')
         sYear = oInputParameterHandler.getValue('sYear')
         sTrailerUrl = oInputParameterHandler.getValue('sTrailerUrl')
         sMeta = oInputParameterHandler.getValue('sMeta')
+
+        if not sFileName: sFileName = sTitle
 
         from resources.lib.ba import cShowBA
         cBA = cShowBA()
@@ -662,7 +665,7 @@ class cGui:
 
     def viewSimil(self):
         sPluginPath = cPluginHandler().getPluginPath()
-        
+
         oInputParameterHandler = cInputParameterHandler()
         sCleanTitle = oInputParameterHandler.getValue('sFileName') if oInputParameterHandler.exist('sFileName') else xbmc.getInfoLabel('ListItem.Property(sCleanTitle)')
         sCat = oInputParameterHandler.getValue('sCat') if oInputParameterHandler.exist('sCat') else xbmc.getInfoLabel('ListItem.Property(sCat)')

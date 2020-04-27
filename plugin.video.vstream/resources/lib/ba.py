@@ -9,6 +9,7 @@ except ImportError:  # Python 3
 
 import ssl
 import re
+import requests
 
 from resources.hosters.youtube import cHoster
 from resources.lib.handler.requestHandler import cRequestHandler
@@ -17,6 +18,7 @@ from resources.lib.player import cPlayer
 from resources.lib.comaddon import addon, dialog
 from resources.lib.tmdb import cTMDb
 from resources.lib.util import QuotePlus
+from tvwatch.utils import testUrl
 
 try:
     import json
@@ -93,28 +95,59 @@ class cShowBA:
             return
         return
 
+    def searchYoutube(self, title):
+        encoded_search = QuotePlus(title)
+        BASE_URL = "https://youtube.com"
+        url = "%s/results?search_query=%s" % (BASE_URL, encoded_search)
+        response = requests.get(url).text
+        while "ytInitialData" not in response:
+            response = requests.get(url).text
+
+        results = []
+        start = (
+            response.index("ytInitialData")
+            + len("ytInitialData")
+            + 3
+        )
+        end = response.index("};", start) + 1
+        json_str = response[start:end]
+        data = json.loads(json_str)
+
+        videos = data["contents"]["twoColumnSearchResultsRenderer"]["primaryContents"][
+            "sectionListRenderer"
+        ]["contents"][0]["itemSectionRenderer"]["contents"]
+
+        for video in videos:
+            res = {}
+            if "videoRenderer" in video.keys():
+                video_data = video.get("videoRenderer", {})
+                results.append(video_data.get("videoId", None))
+
+        return results
+
     def SearchBA(self, window=False):
 
         sTitle = self.search + ' - Bande Annonce'
 
         # Le lien sur la BA est déjà connu
         urlTrailer = self.sTrailerUrl
-        
+
         # Sinon recherche de la BA officielle dans TMDB
-        if not urlTrailer:
+        if not urlTrailer or not testUrl(urlTrailer, 5):
             meta = cTMDb().get_meta(self.metaType, self.search, year=self.year)
             if 'trailer' in meta and meta['trailer']:
                 self.SetTrailerUrl(meta['trailer'])
                 urlTrailer = self.sTrailerUrl
-                
+
         # Sinon recherche dans youtube
-        if not urlTrailer:
-            urlTrailer = 'https://www.youtube.com/results?q=' + QuotePlus(sTitle) + '&sp=EgIYAQ%253D%253D'
-            
-            oRequestHandler = cRequestHandler(urlTrailer)
-            sHtmlContent = oRequestHandler.request()
-    
-            listResult = re.findall('"url":"\/watch\?v=([^"]+)"', sHtmlContent)
+        if not urlTrailer or not testUrl(urlTrailer, 5):
+            listResult =  self.searchYoutube(sTitle)
+            # urlTrailer = 'https://www.youtube.com/results?q=' + QuotePlus(sTitle) + '&sp=EgIYAQ%253D%253D'
+            #
+            # oRequestHandler = cRequestHandler(urlTrailer)
+            # sHtmlContent = oRequestHandler.request()
+            #
+            # listResult = re.findall('"url":"\/watch\?v=([^"]+)"', sHtmlContent)
             if listResult:
                 # Premiere video trouvée
                 urlTrailer = 'http://www.youtube.com/watch?v=' + listResult[0]

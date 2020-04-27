@@ -28,8 +28,8 @@ class cGuiElement:
         addons = addon()
         
         # self.__sRootArt = cConfig().getRootArt()
+        self.__sRootArt = 'special://home/addons/plugin.video.tvwatch2/resources/art/'
         self.__sFunctionName = ''
-        self.__sRootArt = 'special://home/addons/plugin.video.vstream/resources/art/'
         self.__sType = 'Video'
         self.__sMeta = 0
         self.__sPlaycount = 0
@@ -54,7 +54,7 @@ class cGuiElement:
         self.__Season = ''
         self.__Episode = ''
         self.__sIcon = self.DEFAULT_FOLDER_ICON
-        self.__sFanart = 'special://home/addons/plugin.video.vstream/fanart.jpg'
+        self.__sFanart = 'special://home/addons/plugin.video.tvwatch2/fanart.jpg'
         self.__sDecoColor = addons.getSetting('deco_color')
 
         # For meta search
@@ -367,7 +367,7 @@ class cGuiElement:
     def getIcon(self):
         # if 'http' in self.__sIcon:
         #    return UnquotePlus(self.__sIcon)
-        folder = 'special://home/addons/plugin.video.vstream/resources/art'
+        folder = 'special://home/addons/plugin.video.tvwatch2/resources/art'
         path = '/'.join([folder, self.__sIcon])
         # return os.path.join(unicode(self.__sRootArt, 'utf-8'), self.__sIcon)
         return path

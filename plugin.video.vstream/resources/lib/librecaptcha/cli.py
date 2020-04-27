@@ -27,7 +27,7 @@ import xbmcvfs, re
 
 Objectif = ""
 DimTab = []
-STRINGS_PATH = 'special://home/userdata/addon_data/plugin.video.vstream'
+STRINGS_PATH = 'special://home/userdata/addon_data/plugin.video.tvwatch2'
 
 class CliSolver:
     def __init__(self, solver):
@@ -144,7 +144,7 @@ class Cli(Frontend):
         if goal:
             return
         global Objectif, DimTab
-        
+
         ID = json.dumps(meta).split(',')[0].replace('[','')
         f = xbmcvfs.File(STRINGS_PATH + "/data.js")
         content = f.read()
