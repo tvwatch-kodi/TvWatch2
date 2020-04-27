@@ -17,7 +17,7 @@ class cHosterGui:
     ADDON = addon()
 
     # step 1 - bGetRedirectUrl in ein extra optionsObject verpacken
-    def showHoster(self, oGui, oHoster, sMediaUrl, sThumbnail, bGetRedirectUrl=False):
+    def showHoster(self, oGui, oHoster, sMediaUrl, sThumbnail, bGetRedirectUrl=False, force = False):
 
         oInputParameterHandler = cInputParameterHandler()
 
@@ -111,9 +111,9 @@ class cHosterGui:
 
         # bug
         oGui.addHost(oGuiElement, oOutputParameterHandler)
-        
-            
-        
+
+
+
 
     def checkHoster(self, sHosterUrl):
         # securite
@@ -140,13 +140,13 @@ class cHosterGui:
                 RH = RH.replace('www.', '')
                 tmp.setRealHost(RH.split('.')[0].upper())
                 return tmp
-            
+
         # L'user a active alldebrid ?
-            
+
         if self.ADDON.getSetting('hoster_alldebrid_premium') == 'true':
             return self.getHoster('alldebrid')
-            
-                
+
+
 
         # Gestion classique
         if ('streamz' in sHostName):
@@ -196,9 +196,9 @@ class cHosterGui:
         if ('uptostream' in sHostName):
             return self.getHoster('uptostream')
         if ('dailymotion' in sHostName) or ('dai.ly' in sHostName):
-            try:    
-                if 'stream' in sHosterUrl:    
-                    return self.getHoster('lien_direct')    
+            try:
+                if 'stream' in sHosterUrl:
+                    return self.getHoster('lien_direct')
             except:
                 pass
             else:
@@ -402,7 +402,7 @@ class cHosterGui:
             return False
         if ('easyload.io' in sHostName):
             return self.getHoster('easyload')
-            
+
 
         # Si aucun hebergeur connu on teste les liens directs
         if (sHosterUrl[-4:] in '.mp4.avi.flv.m3u8.webm.mkv'):
@@ -460,14 +460,14 @@ class cHosterGui:
                 if len(aLink) > 2:
                     oPlayer.AddSubtitles(aLink[2])
 
-                oPlayer.run(oGuiElement, oHoster.getFileName(), aLink[1])
-                return
+                return oPlayer.run(oGuiElement, oHoster.getFileName(), aLink[1])
             else:
                 oDialog.VSerror(self.ADDON.VSlang(30020))
                 return
 
-        except:
+        except Exception as err:
             oDialog.VSerror(self.ADDON.VSlang(30020))
+            VSlog("Exception hoster.play: {0}".format(err))
             return
 
         oGui.setEndOfDirectory()

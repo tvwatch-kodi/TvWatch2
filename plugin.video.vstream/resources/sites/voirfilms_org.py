@@ -34,11 +34,11 @@ ANIM_ANIMS = (True, 'showMenuAnims')
 ANIM_LIST = (URL_MAIN + 'animes/alphabet/', 'AlphaSearch')
 ANIM_NEWS = (URL_MAIN + 'animes/', 'showMovies')
 
-URL_SEARCH = ('', 'showMovies')
+URL_SEARCH = (URL_MAIN + 'recherche?s=', 'showMovies')
 URL_SEARCH_MOVIES = (URL_MAIN + 'recherche?type=film&s=', 'showMovies')
 URL_SEARCH_SERIES = (URL_MAIN + 'recherche?type=serie&s=', 'showMovies')
 URL_SEARCH_ANIMS = (URL_MAIN + 'recherche?type=anime&s=', 'showMovies')
-# FUNCTION_SEARCH = 'showMovies'
+FUNCTION_SEARCH = 'showMovies'
 UA = 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0'
 
 
