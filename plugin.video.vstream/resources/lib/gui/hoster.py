@@ -74,7 +74,7 @@ class cHosterGui:
         oGuiElement.addContextItem(oContext)
 
         # Download menu
-        if self.ADDON.getSetting('enregistrement_activer') == True :
+        if self.ADDON.getSetting('enregistrement_activer') or True :
             if oHoster.isDownloadable():
                 oContext = cContextElement()
                 oContext.setFile('cDownload')
@@ -83,7 +83,7 @@ class cHosterGui:
                 oContext.setTitle(self.ADDON.VSlang(30202))
                 oContext.setOutputParameterHandler(oOutputParameterHandler)
                 oGuiElement.addContextItem(oContext)
-    
+
             if oHoster.isDownloadable():
                 # Beta context download and view menu
                 oContext = cContextElement()
@@ -95,7 +95,7 @@ class cHosterGui:
                 oGuiElement.addContextItem(oContext)
 
         # Upload menu uptobox
-        if cInputParameterHandler().getValue('site') != 'siteuptobox' and self.ADDON.getSetting('hoster_uptobox_premium') == 'true':
+        if cInputParameterHandler().getValue('site') != 'siteuptobox' and self.ADDON.VSsetting('hoster_uptobox_premium') == 'true':
             host = oHoster.getPluginIdentifier()
             accept = ['uptobox', 'uptostream', 'onefichier', 'uploaded', 'uplea']
             for i in accept:
@@ -103,7 +103,7 @@ class cHosterGui:
                     oGui.CreateSimpleMenu(oGuiElement, oOutputParameterHandler, 'siteuptobox', 'siteuptobox', 'UptomyAccount', self.ADDON.VSlang(30325))
 
         # onefichier
-        if cInputParameterHandler().getValue('site') != 'siteonefichier' and self.ADDON.getSetting('hoster_onefichier_premium') == 'true':
+        if cInputParameterHandler().getValue('site') != 'siteonefichier' and self.ADDON.VSsetting('hoster_onefichier_premium') == 'true':
             host = oHoster.getPluginIdentifier()
             accept = 'onefichier'  # les autres ne fonctionnent pas
             if host == accept:
@@ -135,7 +135,7 @@ class cHosterGui:
             sHostName = sHosterUrl
 
         # L'user a active l'url resolver ?
-        if self.ADDON.getSetting('UserUrlResolver') == 'true':
+        if self.ADDON.VSsetting('UserUrlResolver') == 'true':
             import urlresolver
             hmf = urlresolver.HostedMediaFile(url = sHosterUrl)
             if hmf.valid_url():
@@ -329,9 +329,9 @@ class cHosterGui:
         if ('dustreaming' in sHostName):
             return self.getHoster('dustreaming')
         #frenchvid et clone
-        if ('french-vid' in sHostName or 'yggseries' in sHostName:
+        if ('french-vid' in sHostName) or ('yggseries' in sHostName):
             return self.getHoster('frenchvid')
-        if ('fembed' in sHostName) or 'fem.tohds' in sHostName):
+        if ('fembed' in sHostName) or ('fem.tohds' in sHostName):
             return self.getHoster('frenchvid')
         if ('feurl' in sHostName) or 'fsimg' in sHostName:
             return self.getHoster('frenchvid')
@@ -429,13 +429,13 @@ class cHosterGui:
                 if len(aLink) > 2:
                     oPlayer.AddSubtitles(aLink[2])
 
-                oPlayer.run(oGuiElement, oHoster.getFileName(), aLink[1])
-                return
+                return oPlayer.run(oGuiElement, oHoster.getFileName(), aLink[1])
             else:
                 self.DIALOG.VSerror(self.ADDON.VSlang(30020))
                 return
 
-        except:
+        except Exception as err:
+            VSlog("Exception hoster.play: {0}".format(err))
             self.DIALOG.VSerror(self.ADDON.VSlang(30020))
             return
 
