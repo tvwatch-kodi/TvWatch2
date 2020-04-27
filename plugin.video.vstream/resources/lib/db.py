@@ -19,7 +19,7 @@ except:
 
 class cDb:
 
-    DB = 'special://userdata/addon_data/plugin.video.vstream/vstream.db'
+    DB = 'special://userdata/addon_data/plugin.video.tvwatch2/tvwatch2.db'
     # important seul xbmcvfs peux lire le special
     REALDB = xbmc.translatePath(DB).decode('utf-8')
     DIALOG = dialog()

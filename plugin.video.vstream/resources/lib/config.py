@@ -13,8 +13,8 @@ import xbmcvfs
 #------------------------
 
 class GestionCookie():
-    #PathCache = xbmc.translatePath(xbmcaddon.Addon('plugin.video.vstream').getAddonInfo('profile')).decode('utf-8')
-    PathCache = 'special://userdata/addon_data/plugin.video.vstream'
+    #PathCache = xbmc.translatePath(xbmcaddon.Addon('plugin.video.tvwatch2').getAddonInfo('profile')).decode('utf-8')
+    PathCache = 'special://userdata/addon_data/plugin.video.tvwatch2'
 
     def DeleteCookie(self, Domain):
         #file = os.path.join(self.PathCache, 'Cookie_' + str(Domain) + '.txt')
@@ -82,7 +82,7 @@ class cConfig():
         # self.__sIcon = os.path.join(self.__oPath,'resources', 'art','icon.png')
         # self.__sFanart = os.path.join(self.__oPath,'resources','art','fanart.jpg')
         # self.__sFileFav = os.path.join(self.__oCache,'favourite.db').decode('utf-8')
-        # self.__sFileDB = os.path.join(self.__oCache,'vstream.db').decode('utf-8')
+        # self.__sFileDB = os.path.join(self.__oCache,'tvwatch2.db').decode('utf-8')
         # self.__sFileCache = os.path.join(self.__oCache,'video_cache.db').decode('utf-8')
 
 
@@ -402,8 +402,8 @@ def WindowsBoxes(sTitle, sFileName, num, year = ''):
                 self.close()
 
 
-    #path = xbmc.translatePath('special://home/addons/plugin.video.vstream').decode('utf-8')
-    path = 'special://home/addons/plugin.video.vstream'
+    #path = xbmc.translatePath('special://home/addons/plugin.video.tvwatch2').decode('utf-8')
+    path = 'special://home/addons/plugin.video.tvwatch2'
     #self.__oPath.decode('utf-8')
     wd = XMLDialog('DialogInfo2.xml', path , 'default', '720p')
     wd.doModal()

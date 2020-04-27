@@ -1,14 +1,20 @@
-==================================================================================
-- Version & Repository: https://github.com/Kodi-vStream/venom-xbmc-addons/releases
-- Participer: https://github.com/Kodi-vStream/venom-xbmc-addons/issues
-- Support: https://kodi-vstream.github.io/
-==================================================================================
-==================================================================================
-- Auteurs : Venom, TmpName, Arias800
-==================================================================================
-Merci au contributeur de la bêta.
-- Razorex/Kodigoal/Chataigne73/Sizanic
-==================================================================================
-==================================================================================
-- https://github.com/Kodi-vStream/venom-xbmc-addons/commits/Beta
-==================================================================================
+=============================================================================
+- Version & Repository: https://github.com/tvwatch-kodi/TvWatch2/releases
+- Question & Support: https://github.com/tvwatch-kodi/TvWatch2/issues
+=============================================================================
+- Auteurs : Primatech
+=============================================================================
+- Current Version 1.0.4 - 27.4.2020
+=============================================================================
+- Version 1.0.0
+27.4.2020 -- @tvwatch-kodi -- First stable version
+- Version 1.0.1
+27.4.2020 -- @tvwatch-kodi -- Update hoster configuration
+- Version 1.0.2
+27.4.2020 -- @tvwatch-kodi -- Merge Beta vStream
+- Version 1.0.3
+27.4.2020 -- @tvwatch-kodi -- Fix small issue in vStream Beta
+- Version 1.0.4
+27.4.2020 -- @tvwatch-kodi -- Add Download feature
+27.4.2020 -- @tvwatch-kodi -- Add Continue to watch
+

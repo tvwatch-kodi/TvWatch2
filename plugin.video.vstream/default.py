@@ -12,9 +12,10 @@ from resources.lib.handler.outputParameterHandler import cOutputParameterHandler
 from resources.lib.db import cDb
 from resources.lib.comaddon import progress, VSlog, addon, window, xbmc
 from resources.lib.util import Quote
+from tvwatch import cPatches
+
 # http://kodi.wiki/view/InfoLabels
 # http://kodi.wiki/view/List_of_boolean_conditions
-
 
 ####################
 #
@@ -61,14 +62,19 @@ if DEBUG:
 #     except ImportError:
 #         sys.stderr.write("Error: " + "You must add org.python.pydev.debug.pysrc to your PYTHONPATH.")
 
-
 class main:
 
     def __init__(self):
+        # Apply patch for Tvwatch
+        self.patches = cPatches()
+        self.patches.applyPatches()
+
         self.parseUrl()
         # Ne pas desactiver la ligne d'en dessous, car sinon ca genere
         # des probleme de Db sous Android.
         cDb()._create_tables()
+
+
 
     def parseUrl(self):
 
@@ -152,7 +158,7 @@ class main:
                 return
 
             if sSiteName == 'globalSearch':
-                searchGlobal()
+                self.patches.searchGlobal()
                 return
 
             if sSiteName == 'globalRun':
