@@ -291,7 +291,7 @@ class cDownload:
             return False
         return True
 
-    def download(self, sDBUrl, sTitle, sDownloadPath, FastMode=False):
+    def download(self, sDBUrl, sTitle, sDownloadPath, FastMode=True):
 
         if self.isDownloading():
             self.DIALOG.VSinfo('Erreur', self.ADDON.VSlang(30012))
@@ -304,7 +304,7 @@ class cDownload:
         oHoster = cHosterGui().checkHoster(sDBUrl)
         oHoster.setUrl(sDBUrl)
         aLink = oHoster.getMediaLink()
-        # aLink = (True,'https://github.com/LordVenom/venom-xbmc-addons-beta/blob/master/plugin.video.vstream/Thumbs.db?raw=true')
+        # aLink = (True,'https://github.com/LordVenom/venom-xbmc-addons-beta/blob/master/plugin.video.tvwatch2/Thumbs.db?raw=true')
 
         if aLink[0]:
             sUrl = aLink[1]
@@ -318,7 +318,7 @@ class cDownload:
             return False
 
         try:
-            VSlog('Download', str(sUrl))
+            VSlog('Download ' + str(sUrl))
 
             # background download task
             if FastMode:
@@ -326,7 +326,7 @@ class cDownload:
             else:
                 cDownloadProgressBar(title = self.__sTitle, url = sUrl, Dpath = sDownloadPath ).start()
 
-            VSlog('Download Ok', sDownloadPath)
+            VSlog('Download Ok ' + str(sDownloadPath))
 
         except:
             self.DIALOG.VSinfo(self.ADDON.VSlang(30024), sTitle)
@@ -352,7 +352,7 @@ class cDownload:
         if m:
             sTitle = sTitle + '.' + m.group(0)
         else:
-            sTitle = sTitle + '.flv'  # Si quedale on en prend une au pif
+            sTitle = sTitle + '.avi'  # Si quedale on en prend une au pif
 
         return sTitle
 
@@ -363,7 +363,7 @@ class cDownload:
         sPluginPath = cPluginHandler().getPluginPath()
         sItemUrl = '%s?site=%s&function=%s&title=%s' % (sPluginPath, SITE_IDENTIFIER, 'StartDownloadList', 'title')
         meta = {'title': 'Démarrer la liste'}
-        item = xbmcgui.ListItem('Démarrer la liste', iconImage = 'special://home/addons/plugin.video.vstream/resources/art/download.png')
+        item = xbmcgui.ListItem('Démarrer la liste', iconImage = 'special://home/addons/plugin.video.tvwatch2/resources/art/download.png')
 
         # item.setInfo(type='Video', infoLabels=meta)
         # item.setProperty('Video', 'false')
@@ -431,7 +431,7 @@ class cDownload:
         oPlayer = cPlayer()
         #oPlayer.clearPlayList()
         #oPlayer.addItemToPlaylist(oGuiElement)
-        if not (sys.argv[ 1 ] == '-1'):
+        if not (sys.argv[ 1 ] == '-1') and False:
             oPlayer.run(oGuiElement, sTitle, path)
         else:
             oPlayer.clearPlayList()

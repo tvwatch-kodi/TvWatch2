@@ -27,7 +27,7 @@ def load():
     addons = addon()
     oPremiumHandler = cPremiumHandler('uptobox')
 
-    if (addons.getSetting('hoster_uptobox_username') == '') and (addons.getSetting('hoster_uptobox_password') == ''):
+    if (addons.VSsetting('hoster_uptobox_username') == '') and (addons.VSsetting('hoster_uptobox_password') == ''):
         oGui.addText(SITE_IDENTIFIER, '[COLOR red]' + 'Nécessite un Compte Uptobox Premium ou Gratuit' + '[/COLOR]')
         oOutputParameterHandler = cOutputParameterHandler()
         oOutputParameterHandler.addParameter('siteUrl', 'http://venom/')
@@ -174,7 +174,7 @@ def AddmyAccount():
 def UptomyAccount():
     addons = addon()
 
-    if (addons.getSetting('hoster_uptobox_username') == '') and (addons.getSetting('hoster_uptobox_password') == ''):
+    if (addons.VSsetting('hoster_uptobox_username') == '') and (addons.VSsetting('hoster_uptobox_password') == ''):
         return
     oInputParameterHandler = cInputParameterHandler()
     sMediaUrl = oInputParameterHandler.getValue('sMediaUrl')
@@ -235,4 +235,3 @@ def UptomyAccount():
         #penible ce dialog auth
         xbmc.executebuiltin('Dialog.Close(all,true)')
         xbmcgui.Dialog().notification('Info upload', 'Erreur pattern', xbmcgui.NOTIFICATION_ERROR, 2000, False)
-
