@@ -1,14 +1,62 @@
-==================================================================================
-- Version & Repository: https://github.com/Kodi-vStream/venom-xbmc-addons/releases
-- Participer: https://github.com/Kodi-vStream/venom-xbmc-addons/issues
-- Support: https://kodi-vstream.github.io/
-==================================================================================
-==================================================================================
-- Auteurs : Venom, TmpName, Arias800
-==================================================================================
-Merci au contributeur de la bêta.
-- Razorex/Kodigoal/Chataigne73/Sizanic
-==================================================================================
-==================================================================================
-- https://github.com/Kodi-vStream/venom-xbmc-addons/commits/Beta
-==================================================================================
+=============================================================================
+- Version & Repository: https://github.com/tvwatch-kodi/TvWatch2/releases
+- Question & Support: https://github.com/tvwatch-kodi/TvWatch2/issues
+=============================================================================
+- Auteurs : Primatech
+=============================================================================
+- Current Version 1.0.22 - 28.2.2021
+=============================================================================
+- Version 1.0.0
+27.4.2020 -- @tvwatch-kodi -- First stable version
+- Version 1.0.1
+27.4.2020 -- @tvwatch-kodi -- Update hoster configuration
+- Version 1.0.2
+27.4.2020 -- @tvwatch-kodi -- Merge Beta vStream
+- Version 1.0.3
+27.4.2020 -- @tvwatch-kodi -- Fix small issue in vStream Beta
+- Version 1.0.4
+27.4.2020 -- @tvwatch-kodi -- Add Download feature
+27.4.2020 -- @tvwatch-kodi -- Add Continue to watch
+- Version 1.0.5
+29.4.2020 -- @tvwatch-kodi -- Implement when episode after another
+29.4.2020 -- @tvwatch-kodi -- Improve Continue to watch
+- Version 1.0.6
+29.4.2020 -- @tvwatch-kodi -- Fix minor issue on player settings
+- Version 1.0.7
+29.4.2020 -- @tvwatch-kodi -- Implement Up Next
+- Version 1.0.8
+30.4.2020 -- @tvwatch-kodi -- Minor fix on Up Next
+- Version 1.0.9
+01.5.2020 -- @tvwatch-kodi -- Enhance Up Next and change logo
+- Version 1.0.10
+01.5.2020 -- @tvwatch-kodi -- Change logo
+- Version 1.0.11
+02.5.2020 -- @tvwatch-kodi -- Fix TvShows with multiple seasons
+- Version 1.0.12
+06.5.2020 -- @tvwatch-kodi -- Rebase vStream 0.8.0
+- Version 1.0.13
+06.5.2020 -- @tvwatch-kodi -- Add multiple servers
+06.5.2020 -- @tvwatch-kodi -- Show hints on continue to watch
+06.5.2020 -- @tvwatch-kodi -- Add possibility to search on all servers
+06.5.2020 -- @tvwatch-kodi -- Add dns resolver dynamically
+- Version 1.0.14
+01.6.2020 -- @tvwatch-kodi -- Propose better server when available
+- Version 1.0.15
+01.11.2020 -- @tvwatch-kodi -- Rebase vStream 0.8.2
+01.11.2020 -- @tvwatch-kodi -- Fix UpNext
+01.11.2020 -- @tvwatch-kodi -- Add Zone Streaming
+01.11.2020 -- @tvwatch-kodi -- Fix Zt-stream
+- Version 1.0.16
+23.12.2020 -- @tvwatch-kodi -- Add DNS resolver to testUrl utility
+- Version 1.0.17
+23.12.2020 -- @tvwatch-kodi -- Small fix of Exception message to activate DNS resolver
+- Version 1.0.18
+25.12.2020 -- @tvwatch-kodi -- Add bein match source
+- Version 1.0.19
+25.12.2020 -- @tvwatch-kodi -- Fix bein match source, Live and Ended tags
+- Version 1.0.20
+26.12.2020 -- @tvwatch-kodi -- Use Quote function instead of QuotePlus in beinMatch source
+- Version 1.0.21
+31.01.2020 -- @tvwatch-kodi -- Manage waiting time for non premium Uptobox account
+- Version 1.0.22
+28.02.2020 -- @tvwatch-kodi -- Update for Kodi 19.0 Matrix version

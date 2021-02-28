@@ -15,7 +15,7 @@ import re
 UA = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0'
 headers = {'User-Agent': UA}
 
-SITE_IDENTIFIER = 'zt_stream'
+SITE_IDENTIFIER = 'zone_streaming'
 SITE_NAME = '[COLOR violet]ZT-Stream[/COLOR]'
 SITE_DESC = 'Zone Telechargement en Streaming'
 
@@ -410,7 +410,7 @@ def showMovies(sSearch=''):
                 oGui.addNext(SITE_IDENTIFIER, 'showMovies', '[COLOR teal]Page ' + number + ' >>>[/COLOR]', oOutputParameterHandler)
 
     if not sSearch:
-        oGui.setEndOfDirectory()
+        oGui.setEndOfDirectory(500)
 
 
 def __checkForNextPage(sHtmlContent):
@@ -497,6 +497,17 @@ def showSeriesLinks():
     sThumb = oInputParameterHandler.getValue('sThumb')
     sUrl = oInputParameterHandler.getValue('siteUrl')
 
+    if "-saison" in sMovieTitle.lower():
+        a = sMovieTitle.lower().rfind("-saison")
+        sMovieTitle = sMovieTitle[:a] + "- Saison" + sMovieTitle[a+len("-saison"):]
+
+    raw_title = sMovieTitle
+    if "saison" in raw_title.lower():
+        raw_title = raw_title[:raw_title.lower().rfind("saison")]
+        raw_title = raw_title.strip()
+        if raw_title[-1] == "-": raw_title = raw_title[:-1]
+        raw_title = raw_title.strip()
+
     oRequestHandler = cRequestHandler(sUrl.replace('https', 'http'))
     oRequestHandler.addHeaderEntry('User-Agent', UA)
     oRequestHandler.addHeaderEntry('Accept-Encoding', 'gzip, deflate')
@@ -580,8 +591,8 @@ def showSeriesLinks():
                 sUrl = URL_MAIN + 'animes' + aEntry[0]
             else:
                 sUrl = URL_MAIN + 'telecharger-serie' + aEntry[0]
-            sMovieTitle = aEntry[1] + aEntry[2]
-            sTitle = '[COLOR skyblue]' + sMovieTitle + '[/COLOR]'
+            sMovieTitle = raw_title + ' ' + aEntry[1] + aEntry[2]
+            sTitle = raw_title + ' ' + '[COLOR skyblue]' + aEntry[1] + aEntry[2] + '[/COLOR]'
 
             oOutputParameterHandler = cOutputParameterHandler()
             oOutputParameterHandler.addParameter('siteUrl', sUrl)
@@ -617,7 +628,7 @@ def showHosters():
             oHoster.setFileName(sMovieTitle)
             cHosterGui().showHoster(oGui, oHoster, sHosterUrl, sThumb)
 
-    oGui.setEndOfDirectory()
+    oGui.setEndOfDirectory(50)
 
 
 def showSerieEpisodes():
@@ -637,34 +648,23 @@ def showSerieEpisodes():
     aResult = oParser.parse(sHtmlContent, sPattern)
 
     if (aResult[0] == True):
+        progress_ = progress().VScreate(SITE_NAME)
+        total = len(aResult[1])
         for aEntry in aResult[1]:
+            progress_.VSupdate(progress_, total)
+            if progress_.iscanceled():
+                break
             sUrl = aEntry[0]
             numEpisode = aEntry[1]
+            sHosterUrl = get_protected_link(sUrl)
+            oHoster = cHosterGui().checkHoster(sHosterUrl)
+            if (oHoster != False):
+                sDisplayTitle = 'Episode %s - %s' % (numEpisode, sMovieTitle)
+                oHoster.setDisplayName(sDisplayTitle)
+                oHoster.setFileName(sMovieTitle)
+                cHosterGui().showHoster(oGui, oHoster, sHosterUrl, sThumb)
 
-            sDisplayTitle = 'Episode %s - %s' % (numEpisode, sMovieTitle)
-            oOutputParameterHandler = cOutputParameterHandler()
-            oOutputParameterHandler.addParameter('siteUrl', sUrl)
-            oOutputParameterHandler.addParameter('sMovieTitle', sMovieTitle)
-            oOutputParameterHandler.addParameter('sDisplayTitle', sDisplayTitle)
-            oOutputParameterHandler.addParameter('sThumb', sThumb)
-            oGui.addEpisode(SITE_IDENTIFIER, 'showSeriesHosters', sDisplayTitle, '', sThumb, sMovieTitle, oOutputParameterHandler)
-
-    oGui.setEndOfDirectory()
-
-
-def showSeriesHosters():
-    oGui = cGui()
-    oInputParameterHandler = cInputParameterHandler()
-    sDisplayTitle = oInputParameterHandler.getValue('sDisplayTitle')
-    sMovieTitle = oInputParameterHandler.getValue('sMovieTitle')
-    sUrl = oInputParameterHandler.getValue('siteUrl')
-    sThumb = oInputParameterHandler.getValue('sThumb')
-    sHosterUrl = get_protected_link(sUrl)
-    oHoster = cHosterGui().checkHoster(sHosterUrl)
-    if (oHoster != False):
-        oHoster.setDisplayName(sDisplayTitle)
-        oHoster.setFileName(sMovieTitle)
-        cHosterGui().showHoster(oGui, oHoster, sHosterUrl, sThumb)
+        progress_.VSclose(progress_)
     oGui.setEndOfDirectory()
 
 

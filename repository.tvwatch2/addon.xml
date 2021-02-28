@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addons>
+<addon id="plugin.video.tvwatch2" name="TvWatch2" version="1.0.22" provider-name="Primatech">
+    <requires>
+
+        <trycatch>
+            <try>
+                <import addon="xbmc.python" version="3.0.0"/>
+            </try>
+
+            <catch>
+                <import addon="xbmc.python" version="2.24.0"/>
+            </catch>
+        </trycatch>
+
+        <import addon="script.module.urlresolver" version="5.1.1" optional="true"/>
+        <import addon="script.video.F4mProxy" optional="true"/>
+        <import addon="script.module.simplejson" version="3.3.0"/>
+        <import addon="script.module.requests" version="2.9.1"/>
+        <import addon="script.module.dnspython" optional="true"/>
+        <import addon="repository.tvwatch2" version="0.0.2"/>
+        <import addon="script.module.selenium" optional="true"/>
+        <!-- Pour le DEBUG        <import addon="script.module.pydevd" version="4.4.0"/> -->
+    </requires>
+
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+
+    <extension point="xbmc.service" library="service.py"/>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="fr_FR">TvWatch2</summary>
+        <description lang="fr_FR">TvWatch2 est un module de streaming Francais, retrouvez tous vos films, series, japanimes, documentaires, reportages, concerts, sports,...</description>
+        <disclaimer lang="fr_FR">TvWatch2 est un addon de streaming videos</disclaimer>
+        <summary lang="fr_CA">TvWatch2</summary>
+        <description lang="fr_CA">TvWatch2 est un module de streaming Francais, trouvez tous vos films, series et mangas.</description>
+        <disclaimer lang="fr_CA">TvWatch2 est un addon de streaming videos</disclaimer>
+        <summary lang="en_GB">TvWatch2</summary>
+        <description lang="en_GB">TvWatch2 module and a French streaming, find all your movies, TV shows and mangas.</description>
+        <disclaimer lang="en_GB">TvWatch2 is a video streaming addon</disclaimer>
+        <summary lang="en_NZ">TvWatch2</summary>
+        <description lang="en_NZ">TvWatch2 module and a French streaming, find all your movies, TV shows and mangas.</description>
+        <disclaimer lang="en_NZ">TvWatch2 is a video streaming addon</disclaimer>
+        <summary lang="en_US">TvWatch2</summary>
+        <description lang="en_US">TvWatch2 module and a French streaming, find all your movies, TV shows and mangas.</description>
+        <disclaimer lang="en_US">TvWatch2 is a video streaming addon</disclaimer>
+        <platform>all</platform>
+        <license>GNU GENERAL PUBLIC LICENSE</license>
+        <forum>https://github.com/tvwatch-kodi/TvWatch2/issues</forum>
+        <source>https://github.com/tvwatch-kodi/TvWatch2/</source>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+            <screenshot>screenshot-01.jpg</screenshot>
+            <screenshot>screenshot-02.jpg</screenshot>
+            <screenshot>screenshot-03.jpg</screenshot>
+        </assets>
+    </extension>
+</addon>
+
+<addon id="repository.tvwatch2"
+       name="TvWatch2 Repository"
+        version="0.0.2"
+        provider-name="Primatech">
+    <extension point="xbmc.addon.repository" name="TvWatch2 XBMC Addon Repository">
+		<checksum>https://raw.githubusercontent.com/tvwatch-kodi/TvWatch2/dev/repository.tvwatch2/addon.xml.md5</checksum>
+		<info compressed="false">https://raw.githubusercontent.com/tvwatch-kodi/TvWatch2/dev/repository.tvwatch2/addon.xml</info>
+		<datadir zip="true">https://github.com/tvwatch-kodi/TvWatch2/raw/dev/repository.tvwatch2</datadir>
+   </extension>
+
+    <extension point="xbmc.addon.metadata">
+        <summary lang="fr">TvWatch2 Repository</summary>
+        <description lang="fr">Installer TvWatch2</description>
+        <summary lang="en">TvWatch2 Repository</summary>
+        <description lang="en">Download and install TvWatch2</description>
+        <platform>all</platform>
+    </extension>
+</addon>
+</addons>

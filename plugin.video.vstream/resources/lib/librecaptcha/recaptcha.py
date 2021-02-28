@@ -33,7 +33,7 @@ API_JS_URL = "https://www.google.com/recaptcha/api.js"
 JS_URL_TEMPLATE = "https://www.gstatic.com/recaptcha/releases/{}/recaptcha__fr.js"
 
 STRINGS_VERSION = "0.1.0"
-STRINGS_PATH = 'special://home/userdata/addon_data/plugin.video.vstream'
+STRINGS_PATH = 'special://home/userdata/addon_data/plugin.video.tvwatch2'
 
 DYNAMIC_SELECT_DELAY = 4.5  # seconds
 FIND_GOAL_SEARCH_DISTANCE = 10
@@ -468,7 +468,7 @@ class ReCaptcha:
         challenge_type = rresp[5]
         pmeta = rresp[4]
         self.current_token = rresp[1]
-        
+
         VSlog("Captcha type :" + str(challenge_type) )
 
         solver_class = {
